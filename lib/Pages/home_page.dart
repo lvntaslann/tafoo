@@ -1,8 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:tafoo/Pages/car_search_page.dart';
+import 'package:tafoo/Pages/share_car.dart';
 import 'package:tafoo/Widgets/default_container.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  void page(int value) {
+    if (value == 0)
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => CarSearchPage()));
+    else if (value == 1) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => ShareCar()));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,28 +88,69 @@ class HomePage extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            DefaultContainer(text: "İlan ara", description: "Hayalindeki aracı\nbul!", image:"assets/images/searchcar.png" ,height: size.height * 0.18,width: size.width * 0.40, isNumber: true, isAiOto: false,),
-                            DefaultContainer(text: "İlan ver", description: "Ücretsiz ilan ver 60\ngüne kadar yayında\nkalsın!", image:"assets/images/add-icon-logo.png" ,height: size.height * 0.18,width: size.width * 0.40, isNumber: false, isAiOto: false,),
+                            DefaultContainer(
+                              text: "İlan ara",
+                              description: "Hayalindeki aracı\nbul!",
+                              image: "assets/images/searchcar.png",
+                              height: size.height * 0.18,
+                              width: size.width * 0.40,
+                              isNumber: true,
+                              isAiOto: false,
+                              onTap: () => page(0),
+                            ),
+                            DefaultContainer(
+                              text: "İlan ver",
+                              description:
+                                  "Ücretsiz ilan ver 60\ngüne kadar yayında\nkalsın!",
+                              image: "assets/images/add-icon-logo.png",
+                              height: size.height * 0.18,
+                              width: size.width * 0.40,
+                              isNumber: false,
+                              isAiOto: false,
+                              onTap: ()=>page(1),
+                            ),
                           ],
                         ),
-                                                Row(
-                          children: [
-                            DefaultContainer(text: "Aracımın fiyatı ne kadar ?", description: "Aracının gerçek piyasa\ndeğerini yapay\nzeka ile öğren!",height: size.height * 0.18,width: size.width * 0.40, isNumber: false, isAiOto: false,),
-                            DefaultContainer(text: "Garaj", description: "Aracının periyodik bakımlarını takip et",image: "assets/images/garage.png",height: size.height * 0.18,width: size.width * 0.40, isNumber: false, isAiOto: false,),
-                          ],
-                        ),
-
                         Row(
                           children: [
-                            DefaultContainer(text: "AI OTO EKSPERTİZ", description: "Doğruluk oranı yüksek olan yapay\nzeka desteği ile aracını test et!",image: "assets/images/ai_oto.png", height: size.height*0.30, width: size.width*0.85, isNumber: false, isAiOto: true,)
+                            DefaultContainer(
+                              text: "Aracımın fiyatı ne kadar ?",
+                              description:
+                                  "Aracının gerçek piyasa\ndeğerini yapay\nzeka ile öğren!",
+                              height: size.height * 0.18,
+                              width: size.width * 0.40,
+                              isNumber: false,
+                              isAiOto: false,
+                            ),
+                            DefaultContainer(
+                              text: "Garaj",
+                              description:
+                                  "Aracının periyodik bakımlarını takip et",
+                              image: "assets/images/garage.png",
+                              height: size.height * 0.18,
+                              width: size.width * 0.40,
+                              isNumber: false,
+                              isAiOto: false,
+                            ),
                           ],
                         ),
-
-
+                        Row(
+                          children: [
+                            DefaultContainer(
+                              text: "AI OTO EKSPERTİZ",
+                              description:
+                                  "Doğruluk oranı yüksek olan yapay\nzeka desteği ile aracını test et!",
+                              image: "assets/images/ai_oto.png",
+                              height: size.height * 0.30,
+                              width: size.width * 0.85,
+                              isNumber: false,
+                              isAiOto: true,
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   )
-
                 ],
               ),
             ),
@@ -102,5 +160,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
