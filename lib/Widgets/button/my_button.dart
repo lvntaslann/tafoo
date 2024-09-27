@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
+  final Function() onTap;
   const MyButton({
-    super.key,
+    super.key, required this.onTap,
   });
 
   @override
@@ -12,7 +13,7 @@ class MyButton extends StatelessWidget {
         width: 200,
         height: 50,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: onTap,
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xFFFE7F21),
             shape: RoundedRectangleBorder(

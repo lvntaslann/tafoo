@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tafoo/Pages/sharecar/ai_waiting_page.dart';
 import 'package:tafoo/Widgets/add_image_widget.dart';
 import 'package:tafoo/Widgets/button/back_button.dart';
 import 'package:tafoo/Widgets/button/my_button.dart';
@@ -12,11 +13,14 @@ class AddImagesPage extends StatefulWidget {
 }
 
 class _AddImagesPageState extends State<AddImagesPage> {
+  void onTap(){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>AiWaitingPage()));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
     backgroundColor: const Color.fromRGBO(255, 255, 255, 0.95),
-      body: const Column(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -25,7 +29,7 @@ class _AddImagesPageState extends State<AddImagesPage> {
           SizedBox(height:30),
           AddImageWidget(),
           SizedBox(height: 100),
-          MyButton(),
+          MyButton(onTap: onTap,),
         ],
       ),
 

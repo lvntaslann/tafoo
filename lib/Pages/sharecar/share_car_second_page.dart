@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tafoo/Pages/ai_waiting_page.dart';
+import 'package:tafoo/Pages/sharecar/add_images_page.dart';
+import 'package:tafoo/Pages/sharecar/ai_waiting_page.dart';
 import 'package:tafoo/Widgets/button/back_button.dart';
 import 'package:tafoo/Widgets/button/my_next_button.dart';
 import 'package:tafoo/Widgets/text/my_secondText_widget.dart';
@@ -22,7 +23,7 @@ class _ShareCarSecondPageState extends State<ShareCarSecondPage> {
   TextEditingController costController = TextEditingController();
 
   void nextPage(){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>AiWaitingPage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>AddImagesPage()));
   }
   @override
   Widget build(BuildContext context) {
