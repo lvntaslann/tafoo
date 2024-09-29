@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "963981379810",
+    "project_id": "tafoo-app",
+    "storage_bucket": "tafoo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963981379810:android:922daaaa5c3e67ec6136bb",
+        "android_client_info": {
+          "package_name": "com.tafoo.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApnqVmamcEiG-ARMdmWQTr_qRrkOIthH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

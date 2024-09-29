@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tafoo/Pages/sharecar/add_images_page.dart';
-import 'package:tafoo/Pages/sharecar/ai_waiting_page.dart';
 import 'package:tafoo/Widgets/button/back_button.dart';
 import 'package:tafoo/Widgets/button/my_next_button.dart';
 import 'package:tafoo/Widgets/text/my_secondText_widget.dart';

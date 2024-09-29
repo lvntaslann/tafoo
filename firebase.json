@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"tafoo-app","appId":"1:963981379810:android:922daaaa5c3e67ec6136bb","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"tafoo-app","configurations":{"android":"1:963981379810:android:922daaaa5c3e67ec6136bb","web":"1:963981379810:web:e35f850bf97b10936136bb"}}}}}}
