@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tafoo/Pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:tafoo/WebPages/web_home_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -19,7 +20,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage()
+      home: WebHomePage()
     );
   }
 }
