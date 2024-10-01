@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tafoo/Pages/sharecar/ai_waiting_page.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/ai_waiting_page.dart';
 import 'package:tafoo/Widgets/add_image_widget.dart';
-import 'package:tafoo/Widgets/button/back_button.dart';
-import 'package:tafoo/Widgets/button/my_button.dart';
-import 'package:tafoo/Widgets/text/my_third_text_widget.dart';
+import 'package:tafoo/Widgets/Mobil/button/back_button.dart';
+import 'package:tafoo/Widgets/Mobil/button/my_button.dart';
+import 'package:tafoo/Widgets/Mobil/text/my_third_text_widget.dart';
 
 class AddImagesPage extends StatefulWidget {
   const AddImagesPage({ Key? key }) : super(key: key);

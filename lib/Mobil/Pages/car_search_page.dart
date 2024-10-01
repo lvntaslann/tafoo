@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:tafoo/Pages/shared_car_details.dart';
-import 'package:tafoo/Widgets/button/back_button.dart';
-import 'package:tafoo/Widgets/textfield/search_bar.dart';
+import 'package:tafoo/Mobil/Pages/shared_car_details.dart';
+import 'package:tafoo/Widgets/Mobil/button/back_button.dart';
+import 'package:tafoo/Widgets/Mobil/textfield/search_bar.dart';
 
 class CarSearchPage extends StatefulWidget {
   const CarSearchPage({Key? key}) : super(key: key);

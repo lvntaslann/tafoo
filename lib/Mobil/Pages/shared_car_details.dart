@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:tafoo/Widgets/button/accept_share.dart';
-import 'package:tafoo/Widgets/button/back_button.dart';
+import 'package:tafoo/Widgets/Mobil/button/accept_share.dart';
+import 'package:tafoo/Widgets/Mobil/button/back_button.dart';
 import 'package:tafoo/Widgets/car_image.dart';
 import 'package:tafoo/Widgets/car_share_title.dart';
 import 'package:tafoo/Widgets/cost_value.dart';

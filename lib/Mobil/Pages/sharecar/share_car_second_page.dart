@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tafoo/Pages/sharecar/add_images_page.dart';
-import 'package:tafoo/Widgets/button/back_button.dart';
-import 'package:tafoo/Widgets/button/my_next_button.dart';
-import 'package:tafoo/Widgets/text/my_secondText_widget.dart';
-import 'package:tafoo/Widgets/textfield/share_car_textfield.dart';
-import 'package:tafoo/Widgets/text/title_text_widget.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/add_images_page.dart';
+import 'package:tafoo/Widgets/Mobil/button/back_button.dart';
+import 'package:tafoo/Widgets/Mobil/button/my_next_button.dart';
+import 'package:tafoo/Widgets/Mobil/text/my_secondText_widget.dart';
+import 'package:tafoo/Widgets/Mobil/textfield/share_car_textfield.dart';
+import 'package:tafoo/Widgets/Mobil/text/title_text_widget.dart';
 
 class ShareCarSecondPage extends StatefulWidget {
   const ShareCarSecondPage({Key? key}) : super(key: key);

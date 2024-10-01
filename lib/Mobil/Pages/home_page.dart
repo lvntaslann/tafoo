@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tafoo/Pages/car_search_page.dart';
-import 'package:tafoo/Pages/sharecar/share_car.dart';
+import 'package:tafoo/Mobil/Pages/car_search_page.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/share_car.dart';
 import 'package:tafoo/Widgets/default_container.dart';
 
 class HomePage extends StatefulWidget {
