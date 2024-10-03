@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tafoo/Mobil/splash_screen.dart';
-import 'package:tafoo/WebPages/web_home_page.dart';
+import 'package:tafoo/Web/WebPages/Auth/web_login_page.dart';
 
 class BasePage extends StatelessWidget {
 const BasePage({ Key? key }) : super(key: key);
@@ -10,7 +10,7 @@ const BasePage({ Key? key }) : super(key: key);
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           if (constraints.maxWidth > 800) {
-            return WebHomePage();
+            return WebLoginPage();
           } else {
             return SplashScreen();
           }
