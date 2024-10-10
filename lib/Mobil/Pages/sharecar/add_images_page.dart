@@ -28,7 +28,7 @@ class _AddImagesPageState extends State<AddImagesPage> {
           MyThirdTextWidget(),
           SizedBox(height:30),
           AddImageWidget(),
-          SizedBox(height: 100),
+          SizedBox(height: 50),
           MyButton(onTap: onTap,),
         ],
       ),

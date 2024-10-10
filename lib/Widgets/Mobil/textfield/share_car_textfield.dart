@@ -14,19 +14,19 @@ class ShareCarTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 40),
       child: Container(
-        width: 300, // Burada genişliği istediğin kadar ayarlayabilirsin
+        width: 300,
         height: 50,
         child: TextFormField(
           controller: controller,
           style: TextStyle(
-            color: const Color(0XFFE8E6E6),
-          ),
+          color: Colors.black,
+        ),
           decoration: InputDecoration(
             labelText: text,
             labelStyle: TextStyle(color: Color.fromRGBO(164, 164, 164, 1.0)),
             filled: true,
             floatingLabelBehavior: FloatingLabelBehavior.never,
-            fillColor: Color(0xFFE8E6E6), // Arka plan rengini değiştirdim
+            fillColor: Color(0xFFE8E6E6),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20.0),
               borderSide: BorderSide.none,
