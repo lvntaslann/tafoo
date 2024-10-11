@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tafoo/Web/WebPages/SharCar/web_share_car_page.dart';
 import 'package:tafoo/Widgets/Web/WebRoute/my_web_default_container.dart';
 
 class RouterContainer extends StatelessWidget {
@@ -29,7 +30,7 @@ class RouterContainer extends StatelessWidget {
           width: 180,
           isNumber: false,
           isAiOto: false,
-          onTap: () => (),
+          onTap: () => (Navigator.push(context,MaterialPageRoute(builder: (context)=>WebShareCarPage()))),
         ),
         MyWebDefaultContainer(
           text: "Araban kaç para?",
