@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:tafoo/Mobil/Pages/sharecar/share_car_provider.dart';
-import 'package:tafoo/Web/WebPages/web_home_page.dart';
+import 'package:tafoo/Web/WebPages/SharCar/web_add_image_page.dart';
 import 'package:tafoo/Widgets/Web/ShareCar/web_share_car_button.dart';
 import 'package:tafoo/Widgets/Web/ShareCar/web_share_car_text_widget.dart';
 import 'package:tafoo/Widgets/Web/ShareCar/web_share_car_title.dart';
@@ -29,7 +29,6 @@ class _WebShareCarPageState extends State<WebShareCarPage> {
   TextEditingController kilometerConroller = TextEditingController();
   TextEditingController costController = TextEditingController();
   bool isTrue = true;
-
   void dispose() {
     titleController.dispose();
     descriptionController.dispose();
@@ -45,19 +44,20 @@ class _WebShareCarPageState extends State<WebShareCarPage> {
     costController.dispose();
     super.dispose();
   }
-  void onTap()async {
+
+  void onTap() async {
     await onTapFirstData();
     setState(() {
       isTrue = !isTrue;
     });
   }
 
-  void saveData()async{
-    final saveData = Provider.of<CarShareProvider>(context, listen: false);
+  void saveData() async {
     await onTapSecondData();
-    await saveData.saveCarData();
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>WebHomePage()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => WebAddImagePage()));
   }
+
   Future<void> onTapSecondData() async {
     final carShareProvider =
         Provider.of<CarShareProvider>(context, listen: false);
@@ -127,37 +127,55 @@ class _WebShareCarPageState extends State<WebShareCarPage> {
                               text: "İlan Başlığı",
                             ),
                             SizedBox(height: 10),
-                            WebTextField(text: "Aion S 2024 Model",controller: titleController,),
+                            WebTextField(
+                              text: "Aion S 2024 Model",
+                              controller: titleController,
+                            ),
                             SizedBox(height: 10),
                             WebShareCarTitle(
                               text: "Açıklama",
                             ),
                             SizedBox(height: 10),
-                            WebTextField(text: "Hatasız, boyasız, temiz",controller: descriptionController,),
+                            WebTextField(
+                              text: "Hatasız, boyasız, temiz",
+                              controller: descriptionController,
+                            ),
                             SizedBox(height: 10),
                             WebShareCarTitle(
                               text: "Konum",
                             ),
                             SizedBox(height: 10),
-                            WebTextField(text: "Edirne, Merkez",controller: locationController,),
+                            WebTextField(
+                              text: "Edirne, Merkez",
+                              controller: locationController,
+                            ),
                             SizedBox(height: 10),
                             WebShareCarTitle(
                               text: "Telefon",
                             ),
                             SizedBox(height: 10),
-                            WebTextField(text: "05537743726",controller: phoneNumberController,),
+                            WebTextField(
+                              text: "05537743726",
+                              controller: phoneNumberController,
+                            ),
                             SizedBox(height: 10),
                             WebShareCarTitle(
                               text: "Marka/model",
                             ),
                             SizedBox(height: 10),
-                            WebTextField(text: "BWM",controller: carModelController,),
+                            WebTextField(
+                              text: "BWM",
+                              controller: carModelController,
+                            ),
                             SizedBox(height: 10),
                             WebShareCarTitle(
                               text: "Seri",
                             ),
                             SizedBox(height: 10),
-                            WebTextField(text: "İ3",controller: carSerialController,),
+                            WebTextField(
+                              text: "İ3",
+                              controller: carSerialController,
+                            ),
                             SizedBox(height: 20),
                             WebShareCarButton(onTap: onTap),
                           ],
@@ -210,37 +228,55 @@ class _WebShareCarPageState extends State<WebShareCarPage> {
                                 text: "Yıl",
                               ),
                               SizedBox(height: 7),
-                              WebTextField(text: "2016",controller: yearController,),
+                              WebTextField(
+                                text: "2016",
+                                controller: yearController,
+                              ),
                               SizedBox(height: 7),
                               WebShareCarTitle(
                                 text: "Vites tipi",
                               ),
                               SizedBox(height: 7),
-                              WebTextField(text: "Otomatik",controller: gearController,),
+                              WebTextField(
+                                text: "Otomatik",
+                                controller: gearController,
+                              ),
                               SizedBox(height: 7),
                               WebShareCarTitle(
                                 text: "Yakıt tipi",
                               ),
                               SizedBox(height: 7),
-                              WebTextField(text: "Dizel",controller: fuelController,),
+                              WebTextField(
+                                text: "Dizel",
+                                controller: fuelController,
+                              ),
                               SizedBox(height: 7),
                               WebShareCarTitle(
                                 text: "Kasa tipi",
                               ),
                               SizedBox(height: 7),
-                              WebTextField(text: "Sedan",controller: carTypeController,),
+                              WebTextField(
+                                text: "Sedan",
+                                controller: carTypeController,
+                              ),
                               SizedBox(height: 7),
                               WebShareCarTitle(
                                 text: "Kilometre",
                               ),
                               SizedBox(height: 7),
-                              WebTextField(text: "100000",controller: kilometerConroller,),
+                              WebTextField(
+                                text: "100000",
+                                controller: kilometerConroller,
+                              ),
                               SizedBox(height: 7),
                               WebShareCarTitle(
                                 text: "Aracınızın fiyatı",
                               ),
                               SizedBox(height: 7),
-                              WebTextField(text: "100000",controller: costController,),
+                              WebTextField(
+                                text: "100000",
+                                controller: costController,
+                              ),
                               SizedBox(height: 15),
                               WebShareCarButton(
                                 onTap: saveData,

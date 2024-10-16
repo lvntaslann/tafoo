@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tafoo/Mobil/Pages/sharecar/share_car_provider.dart';
+import 'package:tafoo/Web/WebPages/web_home_page.dart';
 
-class AddImageWidget extends StatefulWidget {
-  const AddImageWidget({
+class web_add_image_container_widget extends StatefulWidget {
+  const web_add_image_container_widget({
     super.key,
   });
 
   @override
-  State<AddImageWidget> createState() => _AddImageWidgetState();
+  State<web_add_image_container_widget> createState() => _web_add_image_container_widgetState();
 }
 
-class _AddImageWidgetState extends State<AddImageWidget> {
+class _web_add_image_container_widgetState extends State<web_add_image_container_widget> {
   bool isCameraImage = false;
   void onTap() async {
     setState(() {
@@ -19,15 +20,15 @@ class _AddImageWidgetState extends State<AddImageWidget> {
     });
     final saveData = Provider.of<CarShareProvider>(context, listen: false);
     await saveData.saveCarData(isCameraImage);
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>WebHomePage()));
   }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding: const EdgeInsets.only(left: 450),
       child: Container(
-        width: 330,
-        height: 250,
+        width: 600,
+        height: 340,
         decoration: BoxDecoration(
           color: Color(0XFFD9D9D9),
           borderRadius: BorderRadius.circular(8),
@@ -35,34 +36,21 @@ class _AddImageWidgetState extends State<AddImageWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //Image.asset("assets/images/camera.png",width: 50,height: 50,),
+            SizedBox(height: 10),
+            //Image.asset("assets/images/plus.png",width: 100,height: 100,),
             IconButton(
                 onPressed: onTap,
                 icon: Icon(
-                  Icons.camera_alt_outlined,
-                  size: 50,
-                )),
-            SizedBox(height: 10),
-            Text(
-              "YA DA",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold),
-            ),
-            //Image.asset("assets/images/galery.png",width: 50,height: 50,),
-            IconButton(
-                onPressed: () {},
-                icon: Icon(
                   Icons.add_photo_alternate_outlined,
-                  size: 50,
+                  size: 100,
+                  color: Color(0XFFFE7F21),
                 )),
             SizedBox(height: 10),
             Text(
               "Görsel Ekle",
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 25,
+                  fontSize: 60,
                   fontWeight: FontWeight.bold),
             )
           ],

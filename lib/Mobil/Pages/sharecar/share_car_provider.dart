@@ -40,7 +40,7 @@ class CarShareProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> saveCarData() async {
+  Future<void> saveCarData(bool isCameraImage) async {
     try {
       CollectionReference adverts = FirebaseFirestore.instance
           .collection('users')
@@ -61,6 +61,7 @@ class CarShareProvider with ChangeNotifier {
         'phoneNumber': phoneNumber,
         'serial': carSerial,
         'year': year,
+        'date':isCameraImage? Timestamp.now():null,
       });
 
       print('Car data saved successfully.');

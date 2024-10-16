@@ -37,10 +37,8 @@ class _ShareCarSecondPageState extends State<ShareCarSecondPage> {
   }
 
   void nextPage() async {
-    final saveData = Provider.of<CarShareProvider>(context, listen: false);
     try {
       await onTapSecondData();
-      await saveData.saveCarData();
 
       if (!mounted) return;
       Navigator.push(

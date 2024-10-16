@@ -13,7 +13,8 @@ class AddImagesPage extends StatefulWidget {
 }
 
 class _AddImagesPageState extends State<AddImagesPage> {
-  void onTap(){
+  
+  void onTap() async{
     Navigator.push(context, MaterialPageRoute(builder: (context)=>AiWaitingPage()));
   }
   @override
