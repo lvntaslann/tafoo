@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_progress_indicator/flutter_circular_progress_indicator.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/cardamage/car_damage_provider.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/cardamage/car_damage_result.dart';
 
 class AiWaitingPage extends StatefulWidget {
   const AiWaitingPage({Key? key}) : super(key: key);
@@ -10,6 +13,29 @@ class AiWaitingPage extends StatefulWidget {
 }
 
 class _AiWaitingPageState extends State<AiWaitingPage> {
+
+   void initState() {
+    super.initState();
+    // İşlemi başlatın ve işlemi dinleyin
+    final carDamageProvider = Provider.of<CarDamageProvider>(context, listen: false);
+
+    // İşlem tamamlandığında kontrol edin
+    carDamageProvider.addListener(() {
+      if (carDamageProvider.processedImage != null && carDamageProvider.detections != null) {
+        // İşlemin tamamlandığını anladığımızda sonucu görüntüleme sayfasına yönlendir
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CarDamageResult(
+              imageBytes: carDamageProvider.processedImage,
+              detections: carDamageProvider.detections,
+            ),
+          ),
+        );
+      }
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

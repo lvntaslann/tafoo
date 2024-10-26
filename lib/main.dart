@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tafoo/Mobil/Auth/auth_provider.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/cardamage/car_damage_provider.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/cardamage/storage_provider.dart';
 import 'package:tafoo/Mobil/Pages/sharecar/share_car_provider.dart';
 import 'package:tafoo/base_page.dart';
 import 'firebase_options.dart';
@@ -15,7 +17,9 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CreateAccountProvider()),
-        ChangeNotifierProvider(create:(context) => CarShareProvider(),)
+        ChangeNotifierProvider(create:(context) => CarShareProvider(),),
+        ChangeNotifierProvider(create: (context)=>StorageProvider()),
+        ChangeNotifierProvider(create: (context)=>CarDamageProvider()),
       ],
       child: MainApp(),
     ),

@@ -16,6 +16,7 @@ class CarShareProvider with ChangeNotifier {
   String? carType;
   String? kilometre;
   String? carCost;
+  List<String> _imageUrls =[];
 
   void carFirstData(String adTitle, String description, String location,
       String phoneNumber, String carModel, String carSerial) {
@@ -40,6 +41,11 @@ class CarShareProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void addImage(List<String> imageUrls) {
+    _imageUrls = imageUrls;
+    notifyListeners();
+  }
+
   Future<void> saveCarData(bool isCameraImage) async {
     try {
       CollectionReference adverts = FirebaseFirestore.instance
@@ -54,7 +60,7 @@ class CarShareProvider with ChangeNotifier {
         'description': description,
         'gearType': gearType,
         'fuel': fuel,
-        'image': "",
+        'image': _imageUrls,
         'kilometre': kilometre,
         'location': location,
         'model': carModel,

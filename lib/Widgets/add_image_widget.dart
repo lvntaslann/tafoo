@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/cardamage/car_damage_provider.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/cardamage/storage_provider.dart';
 import 'package:tafoo/Mobil/Pages/sharecar/share_car_provider.dart';
 
 class AddImageWidget extends StatefulWidget {
@@ -12,13 +15,34 @@ class AddImageWidget extends StatefulWidget {
 }
 
 class _AddImageWidgetState extends State<AddImageWidget> {
+  // Resim yükleme kaynağı: kamera veya galeri
   bool isCameraImage = false;
+
+  // Resim yükleme fonksiyonu
   void onTap() async {
-    setState(() {
-      isCameraImage = !isCameraImage;
-    });
-    final saveData = Provider.of<CarShareProvider>(context, listen: false);
-    await saveData.saveCarData(isCameraImage);
+    final source = isCameraImage ? ImageSource.camera : ImageSource.gallery;
+    await uploadImageAndSaveData(source);
+  }
+
+  Future<void> uploadImageAndSaveData(ImageSource source) async {
+    final storageProvider =
+        Provider.of<StorageProvider>(context, listen: false);
+    final carShareProvider =
+        Provider.of<CarShareProvider>(context, listen: false);
+
+    final carDamageDetect = Provider.of<CarDamageProvider>(context,listen:false);
+
+    // Resim yükleme işlemi
+    String? imageUrl = await storageProvider.uploadImage(source);
+    if (imageUrl != null) {
+      // URL'yi listeye ekle
+      carDamageDetect.uploadImageFromUrl(imageUrl);
+      carShareProvider.addImage([imageUrl]);
+      carShareProvider.saveCarData(isCameraImage);
+    } else {
+      // Hata mesajı gösterebilirsiniz
+      print("Resim yüklenirken bir hata oluştu.");
+    }
   }
 
   @override
@@ -35,9 +59,13 @@ class _AddImageWidgetState extends State<AddImageWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //Image.asset("assets/images/camera.png",width: 50,height: 50,),
             IconButton(
-                onPressed: onTap,
+                onPressed: () {
+                  setState(() {
+                    isCameraImage = true; // Kamera seçildi
+                  });
+                  onTap(); // Resim yükleme işlemini başlat
+                },
                 icon: Icon(
                   Icons.camera_alt_outlined,
                   size: 50,
@@ -50,9 +78,13 @@ class _AddImageWidgetState extends State<AddImageWidget> {
                   fontSize: 25,
                   fontWeight: FontWeight.bold),
             ),
-            //Image.asset("assets/images/galery.png",width: 50,height: 50,),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    isCameraImage = false; // Galeri seçildi
+                  });
+                  onTap(); // Resim yükleme işlemini başlat
+                },
                 icon: Icon(
                   Icons.add_photo_alternate_outlined,
                   size: 50,
