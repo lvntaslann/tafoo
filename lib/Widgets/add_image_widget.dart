@@ -38,9 +38,9 @@ class _AddImageWidgetState extends State<AddImageWidget> {
       // URL'yi listeye ekle
       carDamageDetect.uploadImageFromUrl(imageUrl);
       carShareProvider.addImage([imageUrl]);
-      carShareProvider.saveCarData(isCameraImage);
+      await carShareProvider.saveCarData(isCameraImage);
     } else {
-      // Hata mesajı gösterebilirsiniz
+
       print("Resim yüklenirken bir hata oluştu.");
     }
   }

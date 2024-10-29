@@ -1,23 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
 import 'package:tafoo/Mobil/Pages/sharecar/cardamage/my_svg_widget.dart';
+import 'package:tafoo/Widgets/Mobil/button/back_button.dart';
 
 class CarDamageResult extends StatelessWidget {
   final Uint8List? imageBytes;
   final List<dynamic>? detections;
 
   CarDamageResult({required this.imageBytes, required this.detections});
-
+  final User? currentUser = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Car Damage Detection Result"),
-      ),
+      backgroundColor: Color.fromRGBO(255, 255, 255, 0.95),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 30),
+            AppBackButton(),
             if (imageBytes != null)
               Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -44,7 +46,14 @@ class CarDamageResult extends StatelessWidget {
                 ),
               ),
             SizedBox(height: 16),
-            MySvgWidget(imageBytes: imageBytes, detections: detections),
+            Padding(
+              padding: const EdgeInsets.only(left: 60),
+              child: MySvgWidget(
+                imageBytes: imageBytes,
+                detections: detections,
+                currentUser: currentUser!.uid,
+              ),
+            ),
           ],
         ),
       ),

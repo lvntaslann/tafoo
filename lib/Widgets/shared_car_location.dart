@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Location extends StatelessWidget {
+  final String location;
   const Location({
-    super.key,
+    super.key, required this.location,
   });
 
   @override
@@ -13,7 +14,7 @@ class Location extends StatelessWidget {
         children: [
           Image.asset("assets/images/place.png", width: 20, height: 20),
           Text(
-            "Edirne/Merkez",
+            location,
             style: TextStyle(
                 color: Color(0XFF898989),
                 fontSize: 12,

@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
-
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tafoo/Mobil/Pages/home_page.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/cardamage/car_damage_result.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/share_car_provider.dart';
 import 'package:tafoo/Widgets/Mobil/button/accept_share.dart';
 import 'package:tafoo/Widgets/Mobil/button/back_button.dart';
 import 'package:tafoo/Widgets/car_image.dart';
@@ -12,90 +16,145 @@ import 'package:tafoo/Widgets/shared_car_location.dart';
 import 'package:tafoo/Widgets/shared_detail.dart';
 
 class SharedCarDetails extends StatefulWidget {
-   final String tag;
-  const SharedCarDetails({Key? key, required this.tag}) : super(key: key);
-  
+  final Uint8List? imageBytes;
+  final List<dynamic>? detections;
+  final String? tag;
+
+  const SharedCarDetails({Key? key, this.tag, this.imageBytes, this.detections})
+      : super(key: key);
+
   @override
   _SharedCarDetailsState createState() => _SharedCarDetailsState();
 }
 
 class _SharedCarDetailsState extends State<SharedCarDetails> {
+  Map<String, dynamic>? carData;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    carData = await Provider.of<CarShareProvider>(context, listen: false).getCarDataById();
+    if (carData != null) {
+      setState(() {});
+    }
+  }
+
+  void goAiResult() async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CarDamageResult(
+            imageBytes: widget.imageBytes, detections: widget.detections),
+      ),
+    );
+  }
+
+  void goHomePage() {
+    Provider.of<CarShareProvider>(context, listen: false).resetSvgUploadStatus();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color.fromRGBO(255, 255, 255, 0.95),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SafeArea(
-              child: Row(
-            children: [
-              AppBackButton(),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 40,
-                  left: 50,
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 0.95),
+      body: carData == null 
+          ? const Center(child: CircularProgressIndicator())
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SafeArea(
+                  child: Row(
+                    children: [
+                      const AppBackButton(),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 40, left: 50),
+                        child: Text(
+                          "İlan önizlemesi",
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0XFF5E5D5D),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 40),
+                      GestureDetector(onTap: goHomePage, child: const AcceptShare()),
+                    ],
+                  ),
                 ),
-                child: Text(
-                  "İlan önizlemesi",
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0XFF5E5D5D)),
+                const SizedBox(height: 20),
+                CarImage(
+                  tag: widget.tag ?? "",
+                  url: carData!['image']?[0] ?? "firebasedeki resim",
                 ),
-              ),
-              SizedBox(width: 40),
-              AcceptShare()
-            ],
-          )),
-          SizedBox(height: 20),
-          //Araçların resimlerinin gözükeceği yer
-          CarImage(tag: widget.tag,),
-          SizedBox(height: 5),
-          //aracın paylaşılan başlığı
-          CarShareTitle(),
-          SizedBox(
-            height: 10
-          ),
-          //konum bilgisi
-          Location(),
-          //fiyat bilgisi
-          CostValue(),
-          SizedBox(height: 10),
-          //yapay zeka sonuçlarını görmek için
-          GoAiResult(),
-          SizedBox(height: 10),
-          //profil sayfası oluşturulduktan sonra eklenicek
-          GoProfilPage(),
-          SizedBox(height: 10),
-          // ilan bilgileri,açıklama,hizmetler
-          ChooseContainer(size: size),
-          SizedBox(height: 10),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                
-                children: [
-                  ShareDetail(title: "Marka",result: "Bwm",),
-                  ShareDetail(title: "Seri",result: "İ3",),
-                  ShareDetail(title: "Yıl",result: "2021",),
-                  ShareDetail(title: "Vites tipi",result: "Otomatik",),
-                  ShareDetail(title: "Yakıt tipi",result: "Dizel",),
-                  ShareDetail(title: "Kasa tipi",result: "Sedan",),
-                  ShareDetail(title: "Kilometre",result: "100000Km",),
-                  ShareDetail(title: "Kasa tipi",result: "Sedan",),
-                  ShareDetail(title: "Kasa tipi",result: "Sedan",),
-                ],
-              ),
+                const SizedBox(height: 5),
+                CarShareTitle(
+                  title: carData!['adTitle'] ?? "Sahibinden hasarsız araba",
+                ),
+                const SizedBox(height: 10),
+                Location(location: carData!['location'] ?? "Belirtilmemiş"),
+                CostValue(cost: carData!['carCost'] ?? "1.500.000TL"),
+                const SizedBox(height: 10),
+                GoAiResult(onTap: goAiResult),
+                const SizedBox(height: 10),
+                const GoProfilPage(),
+                const SizedBox(height: 10),
+                ChooseContainer(size: size),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ShareDetail(
+                          title: "Marka",
+                          result: carData!['model'] ?? "Bmw",
+                        ),
+                        ShareDetail(
+                          title: "Seri",
+                          result: carData!['serial'] ?? "İ3",
+                        ),
+                        ShareDetail(
+                          title: "Yıl",
+                          result: carData!['year'] ?? "2021",
+                        ),
+                        ShareDetail(
+                          title: "Vites tipi",
+                          result: carData!['gearType'] ?? "Otomatik",
+                        ),
+                        ShareDetail(
+                          title: "Yakıt tipi",
+                          result: carData!['fuel'] ?? "Dizel",
+                        ),
+                        ShareDetail(
+                          title: "Kasa tipi",
+                          result: carData!['carType'] ?? "Sedan",
+                        ),
+                        ShareDetail(
+                          title: "Kilometre",
+                          result: carData!['kilometre'] ?? "100000Km",
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          )
-        ],
-      ),
     );
   }
 }
+
 
 class ChooseContainer extends StatelessWidget {
   const ChooseContainer({
@@ -117,8 +176,7 @@ class ChooseContainer extends StatelessWidget {
         children: [
           SizedBox(width: 50),
           Column(
-            crossAxisAlignment:
-                CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 "İlan bilgileri",
@@ -132,15 +190,13 @@ class ChooseContainer extends StatelessWidget {
                 height: 1,
                 width: 80,
                 color: Color(0xFFFE7F21),
-                margin: EdgeInsets.only(
-                    top: 4),
+                margin: EdgeInsets.only(top: 4),
               ),
             ],
           ),
           SizedBox(width: 30),
           Column(
-            crossAxisAlignment:
-                CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 "Açıklama",
@@ -154,8 +210,7 @@ class ChooseContainer extends StatelessWidget {
           ),
           SizedBox(width: 30),
           Column(
-            crossAxisAlignment:
-                CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 "Hizmetler",
@@ -172,20 +227,3 @@ class ChooseContainer extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

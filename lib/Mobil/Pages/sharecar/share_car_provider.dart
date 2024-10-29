@@ -16,7 +16,14 @@ class CarShareProvider with ChangeNotifier {
   String? carType;
   String? kilometre;
   String? carCost;
-  List<String> _imageUrls =[];
+  List<String> _imageUrls = [];
+  String? _svgFile;
+  List<Map<String, dynamic>> carDataList = [];
+  List<Map<String, dynamic>> carDataListById = [];
+  String newdDocumentId = "";
+  bool isSvgUploaded = false;
+
+
 
   void carFirstData(String adTitle, String description, String location,
       String phoneNumber, String carModel, String carSerial) {
@@ -46,6 +53,34 @@ class CarShareProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void addSvgFile(String svgUrl) async {
+    _svgFile = svgUrl;
+
+    try {
+      CollectionReference adverts = FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser?.uid)
+          .collection('advert');
+      await adverts.doc(newdDocumentId).update({
+        'svgFile': _svgFile,
+      });
+    } catch (e) {
+      print('Failed to update SVG file: $e');
+    }
+    resettrue();
+    notifyListeners();
+  }
+
+  void resettrue() {
+    isSvgUploaded = true;
+    notifyListeners();
+  }
+
+  void resetSvgUploadStatus() {
+    isSvgUploaded=false;
+    notifyListeners();
+  }
+
   Future<void> saveCarData(bool isCameraImage) async {
     try {
       CollectionReference adverts = FirebaseFirestore.instance
@@ -53,7 +88,7 @@ class CarShareProvider with ChangeNotifier {
           .doc(currentUser?.uid)
           .collection('advert');
 
-      await adverts.add({
+      DocumentReference docRef = await adverts.add({
         'adTitle': adTitle,
         'carCost': carCost,
         'carType': carType,
@@ -67,13 +102,55 @@ class CarShareProvider with ChangeNotifier {
         'phoneNumber': phoneNumber,
         'serial': carSerial,
         'year': year,
-        'date':isCameraImage? Timestamp.now():null,
+        'date': isCameraImage ? Timestamp.now() : null,
       });
 
-      print('Car data saved successfully.');
+      newdDocumentId = docRef.id;
+      print('Car data saved successfully. Document ID: $newdDocumentId');
     } catch (e) {
       print('Failed to save car data: $e');
     }
     notifyListeners();
+  }
+
+  Future<void> getCarData() async {
+    try {
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(currentUser?.uid)
+          .collection("advert")
+          .get();
+
+      carDataList = snapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+      notifyListeners();
+    } catch (e) {
+      print('Error loading car data: $e');
+    }
+  }
+
+  Future<Map<String, dynamic>?> getCarDataById() async {
+    try {
+      DocumentSnapshot docSnapshot = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(currentUser?.uid)
+          .collection("advert")
+          .doc(newdDocumentId)
+          .get();
+
+      if (docSnapshot.exists) {
+        Map<String, dynamic> carData =
+            docSnapshot.data() as Map<String, dynamic>;
+        print(carData);
+        return carData;
+      } else {
+        print('No document found with the given ID.');
+        return null;
+      }
+    } catch (e) {
+      print('Error loading car data by ID: $e');
+      return null;
+    }
   }
 }

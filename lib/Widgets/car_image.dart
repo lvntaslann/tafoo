@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class CarImage extends StatelessWidget {
   final String tag;
+  final String url;
   const CarImage({
-    super.key, required this.tag,
+    super.key, required this.tag, required this.url,
   });
 
   @override
@@ -18,11 +19,7 @@ class CarImage extends StatelessWidget {
             color: Color(0xFFD9D9D9)),
         child: Hero(
           tag: tag,
-          child: Image.asset(
-            "assets/images/carbmw.png",
-            width: 200,
-            height: 200,
-          ),
+          child: Image.network(url)
         ),
       ),
     );

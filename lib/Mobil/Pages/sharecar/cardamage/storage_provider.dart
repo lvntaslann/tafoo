@@ -15,7 +15,6 @@ class StorageProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isUpLoading => _isUpLoading;
 
-  // Fetch images from Firebase Storage
   Future<void> fetchImages() async {
     _isLoading = true;
     notifyListeners();
@@ -34,7 +33,6 @@ class StorageProvider with ChangeNotifier {
     }
   }
 
-  // Delete an image from Firebase Storage
   Future<void> deleteImage(String imageUrl) async {
     try {
       _imageUrls.remove(imageUrl);
@@ -46,10 +44,9 @@ class StorageProvider with ChangeNotifier {
     }
   }
 
-  // Extract the file path from the Firebase Storage URL
   String extractPathFromUrl(String url) {
     Uri uri = Uri.parse(url);
-    return uri.path.substring(1); // Removing leading '/'
+    return uri.path.substring(1);
   }
 
   // Upload an image to Firebase Storage
@@ -60,7 +57,7 @@ class StorageProvider with ChangeNotifier {
   final ImagePicker picker = ImagePicker();
   XFile? image = await picker.pickImage(source: source);
 
-  if (image == null) return null; // Kullanıcı bir resim seçmezse null döner
+  if (image == null) return null;
 
   File file = File(image.path);
 
@@ -69,10 +66,10 @@ class StorageProvider with ChangeNotifier {
     await firebaseStorage.ref(filePath).putFile(file);
     String downloadUrl = await firebaseStorage.ref(filePath).getDownloadURL();
     _imageUrls.add(downloadUrl);
-    return downloadUrl; // Başarılı bir şekilde yüklendiğinde URL döner
+    return downloadUrl;
   } catch (e) {
     print("Error uploading image: $e");
-    return null; // Hata durumunda null döndürür
+    return null;
   } finally {
     _isUpLoading = false;
     notifyListeners();
