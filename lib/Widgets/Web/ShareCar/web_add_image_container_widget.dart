@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/cardamage/car_damage_provider.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/cardamage/storage_provider.dart';
 import 'package:tafoo/Mobil/Pages/sharecar/share_car_provider.dart';
-import 'package:tafoo/Web/WebPages/web_home_page.dart';
 
 class web_add_image_container_widget extends StatefulWidget {
   const web_add_image_container_widget({
@@ -18,9 +19,28 @@ class _web_add_image_container_widgetState extends State<web_add_image_container
     setState(() {
       isCameraImage = !isCameraImage;
     });
-    final saveData = Provider.of<CarShareProvider>(context, listen: false);
-    await saveData.saveCarData(isCameraImage);
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>WebHomePage()));
+    await uploadImageAndSaveData();
+  }
+
+  Future<void> uploadImageAndSaveData() async {
+    final storageProvider =
+        Provider.of<StorageProvider>(context, listen: false);
+    final carShareProvider =
+        Provider.of<CarShareProvider>(context, listen: false);
+
+    final carDamageDetect = Provider.of<CarDamageProvider>(context,listen:false);
+
+    // Resim yükleme işlemi
+    String? imageUrl = await storageProvider.uploadImageWeb();
+    if (imageUrl != null) {
+      // URL'yi listeye ekle
+      carDamageDetect.uploadImageFromUrl(imageUrl);
+      carShareProvider.addImage([imageUrl]);
+      await carShareProvider.saveCarData(isCameraImage);
+    } else {
+
+      print("Resim yüklenirken bir hata oluştu.");
+    }
   }
   @override
   Widget build(BuildContext context) {

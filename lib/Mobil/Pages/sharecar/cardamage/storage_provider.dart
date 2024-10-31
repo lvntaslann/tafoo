@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image_picker_web/image_picker_web.dart';
 
 class StorageProvider with ChangeNotifier {
   final firebaseStorage = FirebaseStorage.instance;
@@ -74,5 +76,53 @@ class StorageProvider with ChangeNotifier {
     _isUpLoading = false;
     notifyListeners();
   }
+}
+
+
+Future<String?> uploadImageWeb() async {
+  _isUpLoading = true;
+  notifyListeners();
+
+  try {
+    final Uint8List? imageBytes = await ImagePickerWeb.getImageAsBytes();
+
+    if (imageBytes == null) return null;
+
+    String mimeType = await getMimeType(imageBytes);
+
+    String fileExtension = mimeType.split('/').last; // 'image/png' -> 'png'
+    
+    String filePath = 'uploaded_images/${currentUser!.uid}/${DateTime.now().millisecondsSinceEpoch}.$fileExtension'; 
+
+    await firebaseStorage.ref(filePath).putData(imageBytes);
+    String downloadUrl = await firebaseStorage.ref(filePath).getDownloadURL();
+
+    _imageUrls.add(downloadUrl);
+    return downloadUrl;
+  } catch (e) {
+    print("Error uploading image: $e");
+    return null;
+  } finally {
+    _isUpLoading = false;
+    notifyListeners();
+  }
+}
+
+Future<String> getMimeType(Uint8List bytes) async {
+  final byteString = bytes.sublist(0, 4);
+  String mime = 'image/png';
+
+  // İlk 4 byte'a göre MIME türünü belirleyin
+  if (byteString[0] == 0xFF && byteString[1] == 0xD8) {
+    mime = 'image/jpeg'; // JPEG
+  } else if (byteString[0] == 0x89 && byteString[1] == 0x50) {
+    mime = 'image/png'; // PNG
+  } else if (byteString[0] == 0x47 && byteString[1] == 0x49) {
+    mime = 'image/gif'; // GIF
+  } else if (byteString[0] == 0x49 && byteString[1] == 0x20) {
+    mime = 'image/tiff'; // TIFF
+  }
+
+  return mime;
 }
 }

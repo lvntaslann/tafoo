@@ -176,7 +176,7 @@ class ChooseContainer extends StatelessWidget {
         children: [
           SizedBox(width: 50),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "İlan bilgileri",

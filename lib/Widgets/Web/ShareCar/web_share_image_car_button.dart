@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class web_share_image_car_button extends StatelessWidget {
+  final Function() ontap;
   const web_share_image_car_button({
-    super.key,
+    super.key, required this.ontap,
   });
 
   @override
@@ -13,7 +14,7 @@ class web_share_image_car_button extends StatelessWidget {
         width: 200,
         height: 50,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: ontap,
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xFFFE7F21),
             shape: RoundedRectangleBorder(
