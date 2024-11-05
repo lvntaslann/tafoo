@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tafoo/Mobil/Pages/sharecar/cardamage/car_damage_provider.dart';
-import 'package:tafoo/Mobil/Pages/sharecar/cardamage/storage_provider.dart';
+
+import 'package:tafoo/Mobil/Pages/sharecar/cardamage/storage_provider_web.dart';
 import 'package:tafoo/Mobil/Pages/sharecar/share_car_provider.dart';
 
 class web_add_image_container_widget extends StatefulWidget {
@@ -24,14 +26,14 @@ class _web_add_image_container_widgetState extends State<web_add_image_container
 
   Future<void> uploadImageAndSaveData() async {
     final storageProvider =
-        Provider.of<StorageProvider>(context, listen: false);
+        Provider.of<StorageProviderWeb>(context, listen: false);
     final carShareProvider =
         Provider.of<CarShareProvider>(context, listen: false);
 
     final carDamageDetect = Provider.of<CarDamageProvider>(context,listen:false);
 
     // Resim yükleme işlemi
-    String? imageUrl = await storageProvider.uploadImageWeb();
+    String? imageUrl = await storageProvider.uploadImage();
     if (imageUrl != null) {
       // URL'yi listeye ekle
       carDamageDetect.uploadImageFromUrl(imageUrl);

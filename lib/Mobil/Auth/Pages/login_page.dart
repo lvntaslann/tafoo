@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tafoo/Mobil/Auth/Pages/signup_page.dart';
 import 'package:tafoo/Mobil/Auth/auth_provider.dart';
+import 'package:tafoo/Mobil/Auth/google_sign_in_provider.dart';
 import 'package:tafoo/Mobil/Pages/home_page.dart';
 import 'package:tafoo/Widgets/Mobil/auth/dont_have_account.dart';
 import 'package:tafoo/Widgets/Mobil/auth/login_logo_container.dart';
@@ -49,6 +50,12 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+
+  void onTapGoogleLogin() async{
+    final googleSignIn =
+        Provider.of<GoogleSignInProvider>(context, listen: false);
+       await googleSignIn.signInWithGoogle(context);
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -80,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                     //farklı giriş yöntemleri için divider widgeti
                     OrDividerWidget(),
                     SizedBox(height: 35),
-                    LoginWithGoogleWidget()
+                    LoginWithGoogleWidget(onTap: onTapGoogleLogin,)
                   ],
                 ),
               ),

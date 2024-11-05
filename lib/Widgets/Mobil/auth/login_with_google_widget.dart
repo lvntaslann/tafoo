@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class LoginWithGoogleWidget extends StatelessWidget {
+  final Function()? onTap;
   const LoginWithGoogleWidget({
-    super.key,
+    super.key,  this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){},
+      onTap: onTap,
       child: Container(
         width: 75,
         height: 62,
