@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:tafoo/Mobil/Pages/sharecar/cardamage/car_damage_provider.dart';
-import 'package:tafoo/Mobil/Pages/sharecar/cardamage/storage_provider.dart';
-import 'package:tafoo/Mobil/Pages/sharecar/share_car_provider.dart';
+import 'package:tafoo/Provider/car_damage_provider.dart';
+import 'package:tafoo/Provider/storage_provider.dart';
+import 'package:tafoo/Provider/share_car_provider.dart';
 
 class AddImageWidget extends StatefulWidget {
   const AddImageWidget({

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tafoo/Mobil/Pages/sharecar/add_images_page.dart';
-import 'package:tafoo/Mobil/Pages/sharecar/share_car_provider.dart';
+import 'package:tafoo/Provider/share_car_provider.dart';
 import 'package:tafoo/Widgets/Mobil/button/back_button.dart';
 import 'package:tafoo/Widgets/Mobil/button/my_next_button.dart';
 import 'package:tafoo/Widgets/Mobil/text/my_secondText_widget.dart';

@@ -13,7 +13,7 @@ class CarDamageProvider extends ChangeNotifier {
 
   // Upload image to Flask API for damage detection
   Future<void> uploadImageFromUrl(String imageUrl) async {
-    var url = Uri.parse('http://127.0.0.1:5000/detect_damage'); // Flask API address
+    var url = Uri.parse('http://192.168.1.107:7000/detect_damage');
     var request = http.MultipartRequest('POST', url);
 
     try {

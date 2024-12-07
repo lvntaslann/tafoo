@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tafoo/Mobil/Pages/shared_car_details.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/shared_car_details.dart';
 
 class CarDiscover extends StatefulWidget {
   const CarDiscover({

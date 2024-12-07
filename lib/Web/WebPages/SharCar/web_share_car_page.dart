@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:tafoo/Mobil/Pages/sharecar/share_car_provider.dart';
+import 'package:tafoo/Provider/share_car_provider.dart';
 import 'package:tafoo/Web/WebPages/SharCar/web_add_image_page.dart';
 import 'package:tafoo/Widgets/Web/ShareCar/web_share_car_button.dart';
 import 'package:tafoo/Widgets/Web/ShareCar/web_share_car_text_widget.dart';

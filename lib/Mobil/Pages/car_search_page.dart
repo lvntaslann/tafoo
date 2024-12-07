@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:tafoo/Mobil/Pages/shared_car_details.dart';
+import 'package:tafoo/Mobil/Pages/GeneralAdverts/automobile_adverts.dart';
+import 'package:tafoo/Mobil/Pages/sharecar/shared_car_details.dart';
 import 'package:tafoo/Widgets/Mobil/button/back_button.dart';
 import 'package:tafoo/Widgets/Mobil/textfield/search_bar.dart';
 
@@ -48,10 +49,15 @@ class _CarSearchPageState extends State<CarSearchPage> {
                 ),
                 child: Column(
                   children: [
-                    CarType(
-                        image: 'assets/images/car.png',
-                        title: 'Otomobil',
-                        number: '91.234'),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AutomobileAdverts()));
+                      },
+                      child: CarType(
+                          image: 'assets/images/car.png',
+                          title: 'Otomobil',
+                          number: '91.234'),
+                    ),
                     CarType(
                         image: 'assets/images/suv.png',
                         title: 'Arazi,Suv,Pick-up',

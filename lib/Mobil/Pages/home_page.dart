@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tafoo/Mobil/Pages/car_search_page.dart';
+import 'package:tafoo/Mobil/Pages/Mygarage/my_garage.dart';
 import 'package:tafoo/Mobil/Pages/sharecar/share_car.dart';
 import 'package:tafoo/Widgets/default_container.dart';
 
@@ -15,10 +16,12 @@ class _HomePageState extends State<HomePage> {
     if (value == 0)
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => CarSearchPage()));
-    else if (value == 1) {
+    else if (value == 1)
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => ShareCar()));
-    }
+        else if (value == 2)
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MyGarage()));
   }
 
   @override
@@ -125,12 +128,13 @@ class _HomePageState extends State<HomePage> {
                             DefaultContainer(
                               text: "Garaj",
                               description:
-                                  "Aracının periyodik bakımlarını takip et",
+                                  "İlan verdiğin araçları görüntüle",
                               image: "assets/images/garage.png",
                               height: size.height * 0.18,
                               width: size.width * 0.40,
                               isNumber: false,
                               isAiOto: false,
+                              onTap: ()=>page(2),
                             ),
                           ],
                         ),

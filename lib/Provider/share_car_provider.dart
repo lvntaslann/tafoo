@@ -20,10 +20,10 @@ class CarShareProvider with ChangeNotifier {
   String? _svgFile;
   List<Map<String, dynamic>> carDataList = [];
   List<Map<String, dynamic>> carDataListById = [];
+
   String newdDocumentId = "";
+  String newGeneralAdvertId = "";
   bool isSvgUploaded = false;
-
-
 
   void carFirstData(String adTitle, String description, String location,
       String phoneNumber, String carModel, String carSerial) {
@@ -64,6 +64,14 @@ class CarShareProvider with ChangeNotifier {
       await adverts.doc(newdDocumentId).update({
         'svgFile': _svgFile,
       });
+
+      CollectionReference generalAdverts = FirebaseFirestore.instance
+          .collection('generalAdverts')
+          .doc("FYsPCD1od0RlTxznamV0")
+          .collection('autoMobile');
+      await generalAdverts.doc(newGeneralAdvertId).update({
+        'svgFile': _svgFile,
+      });
     } catch (e) {
       print('Failed to update SVG file: $e');
     }
@@ -77,7 +85,7 @@ class CarShareProvider with ChangeNotifier {
   }
 
   void resetSvgUploadStatus() {
-    isSvgUploaded=false;
+    isSvgUploaded = false;
     notifyListeners();
   }
 
@@ -87,6 +95,11 @@ class CarShareProvider with ChangeNotifier {
           .collection('users')
           .doc(currentUser?.uid)
           .collection('advert');
+
+      CollectionReference generalAdverts = FirebaseFirestore.instance
+          .collection('generalAdverts')
+          .doc("FYsPCD1od0RlTxznamV0")
+          .collection('autoMobile');
 
       DocumentReference docRef = await adverts.add({
         'adTitle': adTitle,
@@ -105,7 +118,26 @@ class CarShareProvider with ChangeNotifier {
         'date': isCameraImage ? Timestamp.now() : null,
       });
 
+      DocumentReference docRefGeneral = await generalAdverts.add({
+        'userId': currentUser?.uid,
+        'adTitle': adTitle,
+        'carCost': carCost,
+        'carType': carType,
+        'description': description,
+        'gearType': gearType,
+        'fuel': fuel,
+        'image': _imageUrls,
+        'kilometre': kilometre,
+        'location': location,
+        'model': carModel,
+        'phoneNumber': phoneNumber,
+        'serial': carSerial,
+        'year': year,
+        'date': isCameraImage ? Timestamp.now() : null,
+      });
+
       newdDocumentId = docRef.id;
+      newGeneralAdvertId = docRefGeneral.id;
       print('Car data saved successfully. Document ID: $newdDocumentId');
     } catch (e) {
       print('Failed to save car data: $e');
@@ -113,20 +145,50 @@ class CarShareProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getCarData() async {
-    try {
-      QuerySnapshot snapshot = await FirebaseFirestore.instance
-          .collection("users")
-          .doc(currentUser?.uid)
-          .collection("advert")
-          .get();
+  Future<List<Map<String, dynamic>>> getCarData() async {
+  try {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(currentUser?.uid)
+        .collection("advert")
+        .get();
 
-      carDataList = snapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
-      notifyListeners();
+    List<Map<String, dynamic>> carDataList = snapshot.docs
+        .map((doc) => doc.data() as Map<String, dynamic>)
+        .toList();
+    notifyListeners();
+    return carDataList;
+  } catch (e) {
+    print('Error loading car data: $e');
+    return [];
+  }
+}
+
+
+  Future<List<Map<String, dynamic>>> getGeneralAdvertsData() async {
+    List<Map<String, dynamic>> allCarData = [];
+
+    try {
+      // Burada 'autoMobile' koleksiyonundaki tüm dökümanları alıyoruz.
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection("generalAdverts")
+          .doc("FYsPCD1od0RlTxznamV0")
+          .collection("autoMobile")
+          .get(); // get() ile tüm verileri çekiyoruz.
+
+      if (querySnapshot.docs.isNotEmpty) {
+        for (var doc in querySnapshot.docs) {
+          allCarData.add(doc.data() as Map<String, dynamic>);
+        }
+        print('Retrieved ${allCarData.length} car ads');
+      } else {
+        print('No documents found.');
+      }
+
+      return allCarData;
     } catch (e) {
       print('Error loading car data: $e');
+      return [];
     }
   }
 

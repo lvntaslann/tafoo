@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_circular_progress_indicator/flutter_circular_progress_indicator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:tafoo/Mobil/Pages/sharecar/cardamage/car_damage_provider.dart';
-import 'package:tafoo/Mobil/Pages/sharecar/share_car_provider.dart';
+import 'package:tafoo/Provider/car_damage_provider.dart';
+import 'package:tafoo/Provider/share_car_provider.dart';
 import 'package:tafoo/Web/WebPages/SharCar/web_car_share_detail.dart';
 
 class WebAiWaitingPage extends StatefulWidget {

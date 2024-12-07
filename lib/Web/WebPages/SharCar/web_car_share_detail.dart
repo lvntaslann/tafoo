@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tafoo/Mobil/Pages/sharecar/cardamage/my_svg_widget.dart';
-import 'package:tafoo/Mobil/Pages/sharecar/share_car_provider.dart';
+import 'package:tafoo/Provider/share_car_provider.dart';
 import 'package:tafoo/Web/WebPages/web_home_page.dart';
 import 'package:tafoo/Widgets/Mobil/button/accept_share.dart';
 import 'package:tafoo/Widgets/Web/ShareCar/web_car_image.dart';
