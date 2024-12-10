@@ -25,7 +25,7 @@ class MyWebDefaultContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 10),
-      child: GestureDetector(
+      child: InkWell(
         onTap: onTap,
         child: Container(
           height: height,

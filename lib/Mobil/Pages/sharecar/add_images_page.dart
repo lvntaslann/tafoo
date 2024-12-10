@@ -30,7 +30,7 @@ class _AddImagesPageState extends State<AddImagesPage> {
           SizedBox(height:30),
           AddImageWidget(),
           SizedBox(height: 50),
-          MyButton(onTap: onTap,),
+          MyButton(onTap: onTap,text: "Yapay zeka analizi",),
         ],
       ),
 

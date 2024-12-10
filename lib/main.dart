@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tafoo/Mobil/Auth/auth_provider.dart';
 import 'package:tafoo/Mobil/Auth/google_sign_in_provider.dart';
+import 'package:tafoo/Provider/chat_services_provider.dart';
 import 'package:tafoo/Provider/car_damage_provider.dart';
 import 'package:tafoo/Provider/storage_provider.dart';
 import 'package:tafoo/Provider/storage_provider_web.dart';
@@ -24,6 +25,7 @@ void main() async {
         ChangeNotifierProvider(create: (context)=>CarDamageProvider()),
         ChangeNotifierProvider(create: (context)=>GoogleSignInProvider()),
         ChangeNotifierProvider(create: (context)=>StorageProviderWeb()),
+         ChangeNotifierProvider(create: (_) => ChatServicesProvider()),
       ],
       child: MainApp(),
     ),

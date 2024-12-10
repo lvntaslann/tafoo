@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tafoo/Web/WebPages/GeneralAdverts/web_general_adverts.dart';
 import 'package:tafoo/Widgets/Web/Category/web_category_widget.dart';
 import 'package:tafoo/Widgets/Web/DownloadApp/web_download_app.dart';
 import 'package:tafoo/Widgets/Web/NavBatItem/nav_button.dart';
@@ -51,7 +52,15 @@ class _WebHomePageState extends State<WebHomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // Sol bölüm (CarType listesi)
-                WebCategoryWidget(size: size),
+                WebCategoryWidget(
+                  size: size,
+                  generalAdverts: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WebGeneralAdverts()));
+                  },
+                ),
 
                 // Sağ bölüm (Resim ve ilan seçenekleri)
                 Padding(
@@ -79,24 +88,3 @@ class _WebHomePageState extends State<WebHomePage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

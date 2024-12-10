@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tafoo/Mobil/Pages/car_search_page.dart';
 import 'package:tafoo/Mobil/Pages/Mygarage/my_garage.dart';
+import 'package:tafoo/Mobil/Pages/ChatBot/mobile_chatbot.dart';
 import 'package:tafoo/Mobil/Pages/sharecar/share_car.dart';
 import 'package:tafoo/Widgets/default_container.dart';
 
@@ -19,9 +20,12 @@ class _HomePageState extends State<HomePage> {
     else if (value == 1)
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => ShareCar()));
-        else if (value == 2)
+    else if (value == 2)
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => MyGarage()));
+          context, MaterialPageRoute(builder: (context) => MobileChatbot()));
+    else if (value == 3)
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) =>MyGarage() ));
   }
 
   @override
@@ -117,13 +121,14 @@ class _HomePageState extends State<HomePage> {
                         Row(
                           children: [
                             DefaultContainer(
-                              text: "Aracımın fiyatı ne kadar ?",
+                              text: "TafooAI ile tanışın !",
                               description:
-                                  "Aracının gerçek piyasa\ndeğerini yapay\nzeka ile öğren!",
+                                  "Aklına gelen tüm sorularını ona sorabilirsin.",
                               height: size.height * 0.18,
                               width: size.width * 0.40,
                               isNumber: false,
                               isAiOto: false,
+                              onTap: ()=>page(2),
                             ),
                             DefaultContainer(
                               text: "Garaj",
@@ -134,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                               width: size.width * 0.40,
                               isNumber: false,
                               isAiOto: false,
-                              onTap: ()=>page(2),
+                              onTap: ()=>page(3),
                             ),
                           ],
                         ),

@@ -4,7 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:tafoo/Provider/car_damage_provider.dart';
 import 'package:tafoo/Provider/share_car_provider.dart';
-import 'package:tafoo/Web/WebPages/SharCar/web_car_share_detail.dart';
+import 'package:tafoo/Web/WebPages/ShareCar/web_car_share_detail.dart';
 
 class WebAiWaitingPage extends StatefulWidget {
   const WebAiWaitingPage({ Key? key }) : super(key: key);

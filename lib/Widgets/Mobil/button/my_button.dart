@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
   final Function() onTap;
+  final String text;
   const MyButton({
-    super.key, required this.onTap,
+    super.key, required this.onTap, required this.text,
   });
 
   @override
@@ -22,7 +23,7 @@ class MyButton extends StatelessWidget {
             padding: EdgeInsets.zero,
           ),
           child: Text(
-            "Yapay zeka analizi",
+            text,
             style: TextStyle(
                 color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
           ),
