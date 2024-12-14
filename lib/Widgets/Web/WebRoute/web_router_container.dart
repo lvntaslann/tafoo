@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tafoo/Web/WebPages/ChatBot/web_chat_bot.dart';
 import 'package:tafoo/Web/WebPages/GeneralAdverts/web_general_adverts.dart';
+import 'package:tafoo/Web/WebPages/GeneralCarDamageDetection/web_add_image_general.dart';
 import 'package:tafoo/Web/WebPages/ShareCar/web_share_car_page.dart';
 import 'package:tafoo/Web/WebPages/MyGarage/web_my_garage.dart';
 import 'package:tafoo/Widgets/Web/WebRoute/my_web_default_container.dart';
@@ -28,6 +29,9 @@ class _RouterContainerState extends State<RouterContainer> {
     else if (value == 3)
       Navigator.push(
           context, MaterialPageRoute(builder: (context) =>WebMyGarage() ));
+    else if(value ==4)
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) =>WebAddImageGeneral() ));
   }
 
   @override
@@ -83,6 +87,7 @@ class _RouterContainerState extends State<RouterContainer> {
           width: 350,
           isNumber: false,
           isAiOto: true,
+          aiTest: ()=>page(4),
         )
       ],
     );

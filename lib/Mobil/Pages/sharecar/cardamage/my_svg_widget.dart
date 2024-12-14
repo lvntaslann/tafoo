@@ -75,24 +75,37 @@ Widget build(BuildContext context) {
     return svgString;
   }
 
-  Future<void> _uploadModifiedSvg(
-      BuildContext context, String svgString) async {
-    final svgUploadStatus =
-        Provider.of<CarShareProvider>(context, listen: false);
+Future<void> _uploadModifiedSvg(
+    BuildContext context, String svgString) async {
+  final svgUploadStatus =
+      Provider.of<CarShareProvider>(context, listen: false);
 
-    Uint8List svgBytes = Uint8List.fromList(svgString.codeUnits);
-    String filePath =
-        'svg_file/$currentUser/${DateTime.now().millisecondsSinceEpoch}.svg';
-    try {
-      final uploadTask = await firebaseStorage.ref(filePath).putData(svgBytes);
-      final downloadUrl = await uploadTask.ref.getDownloadURL();
-      print(
-          "Düzenlenmiş SVG dosyası Storage'a yüklendi ve URL alındı: $downloadUrl");
-      svgUploadStatus.addSvgFile(downloadUrl);
-    } catch (e) {
-      print("SVG dosyası yüklenirken hata oluştu: $e");
+  // SVG dosyasını byte array'e dönüştür
+  Uint8List svgBytes = Uint8List.fromList(svgString.codeUnits);
+  String svgFilePath =
+      'svg_file/$currentUser/${DateTime.now().millisecondsSinceEpoch}.svg';
+
+  try {
+    // SVG dosyasını yükle
+    final svgUploadTask = await firebaseStorage.ref(svgFilePath).putData(svgBytes);
+    final svgDownloadUrl = await svgUploadTask.ref.getDownloadURL();
+    print("SVG dosyası Storage'a yüklendi: $svgDownloadUrl");
+
+    String? imageDownloadUrl;
+    if (imageBytes != null) {
+      String imageFilePath =
+          'images/$currentUser/${DateTime.now().millisecondsSinceEpoch}.png';
+      final imageUploadTask = await firebaseStorage.ref(imageFilePath).putData(imageBytes!);
+      imageDownloadUrl = await imageUploadTask.ref.getDownloadURL();
+      print("Görsel dosyası Storage'a yüklendi: $imageDownloadUrl");
     }
+
+    svgUploadStatus.addSvgFileWithImage(svgDownloadUrl, imageDownloadUrl);
+  } catch (e) {
+    print("Dosyalar yüklenirken hata oluştu: $e");
   }
+}
+
 
   String _getColorForDamage(String damage) {
     switch (damage) {

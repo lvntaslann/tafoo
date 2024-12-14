@@ -53,31 +53,34 @@ class CarShareProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addSvgFile(String svgUrl) async {
-    _svgFile = svgUrl;
+void addSvgFileWithImage(String svgUrl, String? imageUrl) async {
+  _svgFile = svgUrl;
 
-    try {
-      CollectionReference adverts = FirebaseFirestore.instance
-          .collection('users')
-          .doc(currentUser?.uid)
-          .collection('advert');
-      await adverts.doc(newdDocumentId).update({
-        'svgFile': _svgFile,
-      });
+  try {
+    CollectionReference adverts = FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser?.uid)
+        .collection('advert');
+    await adverts.doc(newdDocumentId).update({
+      'svgFile': _svgFile,
+      if (imageUrl != null) 'imageFile': imageUrl,
+    });
 
-      CollectionReference generalAdverts = FirebaseFirestore.instance
-          .collection('generalAdverts')
-          .doc("FYsPCD1od0RlTxznamV0")
-          .collection('autoMobile');
-      await generalAdverts.doc(newGeneralAdvertId).update({
-        'svgFile': _svgFile,
-      });
-    } catch (e) {
-      print('Failed to update SVG file: $e');
-    }
-    resettrue();
-    notifyListeners();
+    CollectionReference generalAdverts = FirebaseFirestore.instance
+        .collection('generalAdverts')
+        .doc("FYsPCD1od0RlTxznamV0")
+        .collection('autoMobile');
+    await generalAdverts.doc(newGeneralAdvertId).update({
+      'svgFile': _svgFile,
+      if (imageUrl != null) 'imageFile': imageUrl,
+    });
+  } catch (e) {
+    print('SVG ve Görsel dosyası güncellenirken hata oluştu: $e');
   }
+  resettrue();
+  notifyListeners();
+}
+
 
   void resettrue() {
     isSvgUploaded = true;
@@ -139,6 +142,7 @@ class CarShareProvider with ChangeNotifier {
       newdDocumentId = docRef.id;
       newGeneralAdvertId = docRefGeneral.id;
       print('Car data saved successfully. Document ID: $newdDocumentId');
+      print('newGeneralAdvertsOD = $newGeneralAdvertId');
     } catch (e) {
       print('Failed to save car data: $e');
     }

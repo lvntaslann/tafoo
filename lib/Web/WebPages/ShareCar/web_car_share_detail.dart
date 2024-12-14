@@ -122,6 +122,12 @@ class _WebCarShareDetailState extends State<WebCarShareDetail> {
               ),
             ),
             SizedBox(height: 50),
+             if (widget.imageBytes != null)
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Image.memory(widget.imageBytes!),
+              ),
+              SizedBox(height: 50),
             Padding(
               padding: const EdgeInsets.only(left: 600),
               child: MySvgWidget(
@@ -129,6 +135,7 @@ class _WebCarShareDetailState extends State<WebCarShareDetail> {
                   detections: widget.detections,
                   currentUser: currentUser?.uid ?? ""),
             ),
+            
           ],
         ),
       ),

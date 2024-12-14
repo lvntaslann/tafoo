@@ -40,7 +40,7 @@ class ChatServicesProvider extends ChangeNotifier {
   }
 
   Future<String?> fetchAiResult(String userMessage) async {
-    var url = Uri.parse('http://192.168.1.107:8000/ask-ai');
+    var url = Uri.parse('http://192.168.1.177:8000/ask-ai');
     try {
       var response = await http.post(
         url,

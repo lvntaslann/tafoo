@@ -27,7 +27,9 @@ class _AutomobilCarDetailsState extends State<AutomobilCarDetails> {
       context,
       MaterialPageRoute(
         builder: (context) => AutomobileCardamageResult(
-          url: widget.carData['svgFile']
+          url: widget.carData['svgFile'],
+          image: widget.carData['imageFile'],
+
         ),
       ),
     );

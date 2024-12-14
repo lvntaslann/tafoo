@@ -9,13 +9,14 @@ class DefaultContainer extends StatelessWidget {
   final bool isNumber ;
   final bool isAiOto;
   final Function()? onTap;
+  final Function()? aiTest;
   const DefaultContainer({
     super.key,
     required this.text,
     required this.description,
     this.image,
     required this.height,
-    required this.width, required this.isNumber, required this.isAiOto, this.onTap,
+    required this.width, required this.isNumber, required this.isAiOto, this.onTap, this.aiTest,
   });
 
 
@@ -70,7 +71,7 @@ class DefaultContainer extends StatelessWidget {
                     style: TextStyle(color: Color.fromRGBO(164, 164, 164, 1.0))),
               ),
               SizedBox(width: 30),
-              IconButton(onPressed: (){}, icon: Icon(Icons.arrow_circle_right_outlined,size: 30,))
+              IconButton(onPressed: aiTest, icon: Icon(Icons.arrow_circle_right_outlined,size: 30,))
                 ],
               ),
               Row(

@@ -21,10 +21,10 @@ class ChatBuble extends StatelessWidget {
 
 
     EdgeInsets paddingUser = isWeb
-        ? const EdgeInsets.only(right: 25) // Web'de daha fazla padding
+        ? const EdgeInsets.only(right: 150) // Web'de daha fazla padding
         : const EdgeInsets.only(right: 5); // Mobilde normal padding
     EdgeInsets paddingLottie = isWeb
-        ? const EdgeInsets.only(left: 25)
+        ? const EdgeInsets.only(left: 150)
         : const EdgeInsets.only(left: 5);
 
     TextPainter textPainter = TextPainter(

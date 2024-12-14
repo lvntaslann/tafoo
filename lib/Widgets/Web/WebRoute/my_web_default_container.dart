@@ -9,6 +9,7 @@ class MyWebDefaultContainer extends StatelessWidget {
   final bool isNumber;
   final bool isAiOto;
   final Function()? onTap;
+  final Function()? aiTest;
   const MyWebDefaultContainer({
     super.key,
     required this.text,
@@ -18,7 +19,7 @@ class MyWebDefaultContainer extends StatelessWidget {
     required this.width,
     required this.isNumber,
     required this.isAiOto,
-    this.onTap,
+    this.onTap, this.aiTest,
   });
 
   @override
@@ -76,7 +77,7 @@ class MyWebDefaultContainer extends StatelessWidget {
                     ),
                     SizedBox(width: 10),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: aiTest,
                         icon: Icon(
                           Icons.arrow_circle_right_outlined,
                           size: 30,

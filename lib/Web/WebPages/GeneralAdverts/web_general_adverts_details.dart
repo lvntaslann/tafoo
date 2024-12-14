@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:tafoo/Widgets/Web/NavBatItem/web_navbar.dart';
 import 'package:tafoo/Widgets/Web/ShareCar/web_car_image.dart';
 import 'package:tafoo/Widgets/Web/ShareCar/web_choose_container.dart';
 import 'package:tafoo/Widgets/Web/ShareCar/web_share_detail.dart';
@@ -8,9 +10,10 @@ import 'package:tafoo/Widgets/Web/web_cost_value.dart';
 import 'package:tafoo/Widgets/Web/web_go_profil_page.dart';
 
 class WebGeneralAdvertsDetails extends StatelessWidget {
+  const WebGeneralAdvertsDetails({ Key? key, required this.carData, required this.tag }) : super(key: key);
+
   final Map<String, dynamic> carData;
   final String tag;
-  const WebGeneralAdvertsDetails({ Key? key, required this.carData, required this.tag }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +25,7 @@ class WebGeneralAdvertsDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            WebNavBar(size: size),
             WebCarImage(
               tag: tag,
               size: size,
@@ -76,6 +80,58 @@ class WebGeneralAdvertsDetails extends StatelessWidget {
               ),
             ),
             SizedBox(height: 50),
+            Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // SVG Görseli
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: SvgPicture.network(
+                carData['svgFile'],
+                width: 300,
+                height: 300,
+                placeholderBuilder: (BuildContext context) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
+          // PNG/JPEG Görseli
+          Center(
+            child: Container(
+              width: 450,
+              height: 450,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  carData['imageFile'],
+                  fit: BoxFit.cover,
+                  width: 800,
+                  height: 350,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+        ],
+      ),
           ],
         ),
       ),

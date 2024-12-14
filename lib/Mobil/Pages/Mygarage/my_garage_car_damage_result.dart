@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:tafoo/Widgets/Mobil/button/back_button.dart';
 
-class AutomobileCardamageResult extends StatelessWidget {
+class MyGarageCarDamageResult extends StatefulWidget {
   final String url; // SVG dosyasının URL'si
   final String image; // PNG/JPEG görselinin URL'si
+  const MyGarageCarDamageResult({ Key? key, required this.url, required this.image }) : super(key: key);
 
-  const AutomobileCardamageResult({
-    Key? key,
-    required this.url,
-    required this.image,
-  }) : super(key: key);
+  @override
+  _MyGarageCarDamageResultState createState() => _MyGarageCarDamageResultState();
+}
 
+class _MyGarageCarDamageResultState extends State<MyGarageCarDamageResult> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class AutomobileCardamageResult extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: SvgPicture.network(
-                url,
+                widget.url,
                 width: 300,
                 height: 300,
                 placeholderBuilder: (BuildContext context) => const Center(
@@ -59,7 +59,7 @@ class AutomobileCardamageResult extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
-                  image,
+                  widget.image,
                   fit: BoxFit.cover,
                   loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
                     if (loadingProgress == null) return child;

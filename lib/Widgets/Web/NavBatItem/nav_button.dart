@@ -28,7 +28,7 @@ class MyWebSearchBar extends StatelessWidget {
       padding: const EdgeInsets.only(left: 70, top: 30),
       child: Container(
         width: 953, // Burada genişliği istediğin kadar ayarlayabilirsin
-        height: 80,
+        height: 60,
         child: TextFormField(
           style: TextStyle(
             color: const Color.fromARGB(255, 110, 109, 109).withOpacity(0.9),

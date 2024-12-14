@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tafoo/Mobil/Pages/GeneralCarDamageDetection/add_image_general.dart';
 import 'package:tafoo/Mobil/Pages/car_search_page.dart';
 import 'package:tafoo/Mobil/Pages/Mygarage/my_garage.dart';
 import 'package:tafoo/Mobil/Pages/ChatBot/mobile_chatbot.dart';
@@ -26,6 +27,9 @@ class _HomePageState extends State<HomePage> {
     else if (value == 3)
       Navigator.push(
           context, MaterialPageRoute(builder: (context) =>MyGarage() ));
+    else if(value ==4)
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) =>AddImageGeneral() ));
   }
 
   @override
@@ -154,6 +158,7 @@ class _HomePageState extends State<HomePage> {
                               width: size.width * 0.85,
                               isNumber: false,
                               isAiOto: true,
+                              aiTest: ()=> page(4),
                             )
                           ],
                         ),

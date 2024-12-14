@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tafoo/Provider/share_car_provider.dart';
 import 'package:tafoo/Web/WebPages/GeneralAdverts/web_general_adverts_details.dart';
 import 'package:tafoo/Widgets/Web/NavBatItem/web_navbar.dart';
+import 'package:data_table_2/data_table_2.dart';
 
 class WebGeneralAdverts extends StatefulWidget {
   const WebGeneralAdverts({Key? key}) : super(key: key);
@@ -73,134 +74,104 @@ class _WebGeneralAdvertsState extends State<WebGeneralAdverts> {
       body: Column(
         children: [
           WebNavBar(size: size),
-
           const SizedBox(height: 15),
           Expanded(
-            child: ListView.builder(
-              itemCount: carDetails.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15.0,
-                    vertical: 10.0,
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: DataTable2(
+                columnSpacing: 8,
+                horizontalMargin: 8,
+                minWidth: 800,
+                dataRowHeight: 120,
+                columns: const [
+                  DataColumn(label: Text('Resim')),
+                  DataColumn(label: Text('İlan Başlığı')),
+                  DataColumn(label: Text('Açıklama')),
+                  DataColumn(label: Text('Konum')),
+                  DataColumn(label: Text('Fiyat')),
+                  DataColumn(label: Text('Araç Tipi')),
+                  DataColumn(label: Text('Vites Tipi')),
+                  DataColumn(label: Text('Kilometre')),
+                ],
+                rows: List.generate(carDetails.length, (index) {
+                  final car = carDetails[index];
+                  final image = car['image'];
+                  String? imageUrl;
+
+                  if (image is List && image.isNotEmpty) {
+                    imageUrl = image[0];
+                  } else if (image is String) {
+                    imageUrl = image;
+                  } else {
+                    imageUrl = null; // Varsayılan resim için null
+                  }
+
+                  return DataRow(
+                    cells: [
+                      DataCell(
                         InkWell(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>WebGeneralAdvertsDetails(carData: carDetails[index], tag: "car_$index")));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => WebGeneralAdvertsDetails(
+                                  carData: car,
+                                  tag: "car_$index",
+                                ),
+                              ),
+                            );
                           },
-                          child: Row(
-                            children: [
-                              Hero(
-                                tag: "car_$index",
-                                child: carDetails[index]['image'] is List &&
-                                        (carDetails[index]['image'] as List)
-                                            .isNotEmpty
-                                    ? Image.network(
-                                        (carDetails[index]['image'] as List)[0],
-                                        width: 120,
-                                        height: 80,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : Image.asset(
-                                        'assets/images/default_image.png',
-                                        width: 120,
-                                        height: 80,
-                                        fit: BoxFit.cover,
-                                      ),
-                              ),
-                              const SizedBox(width: 20),
-                          
-                                    Text(
-                                      carDetails[index]['adTitle'] ??
-                                          "İlan Başlığı",
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 20),
-                                    Text(
-                                      carDetails[index]['description'] ??
-                                          "Açıklama bilgisi yok.",
-                                      style: const TextStyle(
-                                        color: Color(0xFF898989),
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                          
-                              const SizedBox(width: 20),
-                          
-                              Text(
-                                carDetails[index]['location'] ?? "Konum bilgisi",
-                                style: const TextStyle(
-                                  color: Color(0xFF5E5D5D),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(width: 20),
-                              Text(
-                                carDetails[index]['carCost']  ?? "Fiyat bilgisi",
-                                style: const TextStyle(
-                                  color: Color(0xFFFE7F21),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              const SizedBox(width: 20),
-                          
-                          
-                              Text(
-                                carDetails[index]['carType'] ?? "Konum bilgisi",
-                                style: const TextStyle(
-                                  color: Color(0xFF5E5D5D),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(width: 20),
-                          
-                              Text(
-                                carDetails[index]['gearType'] ?? "Konum bilgisi",
-                                style: const TextStyle(
-                                  color: Color(0xFF5E5D5D),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(width: 20),
-                          
-                              Text(
-                                carDetails[index]['kilometre'] ?? "Konum bilgisi",
-                                style: const TextStyle(
-                                  color: Color(0xFF5E5D5D),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+                          child: Hero(
+                            tag: "car_image_$index",
+                            child: imageUrl != null
+                                ? Image.network(
+                                    imageUrl,
+                                    width: 200,
+                                    height: 95,
+                                    fit: BoxFit.cover,
+                                  )
+                                : Image.asset(
+                                    'assets/images/default_image.png',
+                                    width: 100,
+                                    height: 60,
+                                    fit: BoxFit.cover,
+                                  ),
                           ),
                         ),
-
-
-                      ],
-                    ),
-                  ),
-                );
-              },
+                      ),
+                      DataCell(
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => WebGeneralAdvertsDetails(
+                                  carData: car,
+                                  tag: "car_title_$index",
+                                ),
+                              ),
+                            );
+                          },
+                          child: Hero(
+                            tag: "car_title_$index",
+                            child: Text(
+                              car['adTitle'] ?? "İlan Başlığı",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                      DataCell(Text(car['description'] ?? "Açıklama bilgisi yok.")),
+                      DataCell(Text(car['location'] ?? "Konum bilgisi")),
+                      DataCell(Text(car['carCost'] ?? "Fiyat bilgisi",style: TextStyle(color: Color(0XFFFE7F21)),)),
+                      DataCell(Text(car['carType'] ?? "Araç Tipi yok")),
+                      DataCell(Text(car['gearType'] ?? "Vites Tipi yok")),
+                      DataCell(Text(car['kilometre'] ?? "Kilometre bilgisi yok")),
+                    ],
+                  );
+                }),
+              ),
             ),
           ),
         ],

@@ -22,30 +22,35 @@ class WebCategoryWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
+            SizedBox(height: 25),
             WebCarType(
               image: 'assets/images/car.png',
               title: 'Otomobil',
               number: '91.234',
               onTap: generalAdverts,
             ),
+            SizedBox(height: 8),
             WebCarType(
               image: 'assets/images/suv.png',
               title: 'Arazi, SUV, Pick-up',
               number: '12.123', 
               onTap:generalAdverts,
             ),
+            SizedBox(height: 8),
             WebCarType(
               image: 'assets/images/motorcycle.png',
               title: 'Motosiklet',
               number: '2.343',
                onTap:generalAdverts,
             ),
+            SizedBox(height: 8),
             WebCarType(
               image: 'assets/images/pickup.png',
               title: 'Ticari Araçlar',
               number: '1.234',
                onTap: generalAdverts,
             ),
+            SizedBox(height: 8),
             WebCarType(
               image: 'assets/images/broken-car.png',
               title: 'Hasarlı Araçlar',

@@ -17,23 +17,23 @@ class WebCarType extends StatefulWidget {
 }
 
 class _WebCarTypeState extends State<WebCarType> {
-  double _avatarRadius = 30.0;
+  double _avatarRadius = 20.0;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(height: 15),
+        SizedBox(height: 25),
         MouseRegion(
           onEnter: (event) {
             setState(() {
-              _avatarRadius = 40.0;
+              _avatarRadius = 30.0;
             });
           },
           onExit: (event) {
             setState(() {
-              _avatarRadius = 30.0;
+              _avatarRadius = 20.0;
             });
           },
           child: InkWell(
@@ -54,7 +54,7 @@ class _WebCarTypeState extends State<WebCarType> {
                   style: TextStyle(
                     color: Color.fromRGBO(254, 127, 33, 1.0),
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 15,
                   ),
                 ),
                 SizedBox(width: 10),
@@ -62,7 +62,7 @@ class _WebCarTypeState extends State<WebCarType> {
                   widget.number,
                   style: TextStyle(
                     color: Color.fromRGBO(164, 164, 164, 1.0),
-                    fontSize: 15,
+                    fontSize: 12,
                   ),
                 ),
               ],
@@ -78,7 +78,7 @@ class _WebCarTypeState extends State<WebCarType> {
           ),
         ),
         SizedBox(
-          height: 20,
+          height: 12,
         )
       ],
     );

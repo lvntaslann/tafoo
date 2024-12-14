@@ -34,8 +34,8 @@ class _WebHomePageState extends State<WebHomePage> {
                 children: [
                   Image.asset(
                     "assets/images/tafoologo.png",
-                    width: 180,
-                    height: 130,
+                    width: 150,
+                    height: 100,
                   ),
                   Text(
                     "hep yanında !",
@@ -78,10 +78,10 @@ class _WebHomePageState extends State<WebHomePage> {
                 ),
               ],
             ),
+            SizedBox(height: 50,),
             CarDiscover(size: size),
-            SizedBox(height: 100),
+            SizedBox(height: 50),
             WebDownloadApp(size: size),
-            SizedBox(height: 100),
           ],
         ),
       ),

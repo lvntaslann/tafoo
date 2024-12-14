@@ -4,9 +4,21 @@ import 'package:tafoo/Provider/chat_services_provider.dart';
 import 'package:tafoo/Widgets/ChatBot/chat_buble.dart';
 import 'package:tafoo/Widgets/ChatBot/chat_user_input_widget.dart';
 
-class WebChatPage extends StatelessWidget {
+class WebChatPage extends StatefulWidget {
+  @override
+  State<WebChatPage> createState() => _WebChatPageState();
+}
+
+class _WebChatPageState extends State<WebChatPage> {
   final TextEditingController _messageController = TextEditingController();
+
   final ScrollController _scrollController = ScrollController();
+
+  bool activateDefaultMessage = true;
+  String defaultMessage = "";
+  bool activateDefaultMessage2 = false;
+  String defaultMessage2 = "";
+
   void scrollDown({bool animated = true}) {
     if (_scrollController.hasClients) {
       if (animated) {
@@ -19,6 +31,28 @@ class WebChatPage extends StatelessWidget {
         _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
       }
     }
+  }
+
+  @override
+  void initState() {
+    super.initState(); // This line is important
+
+    // Show the first message after 2 seconds and hide the loading indicator
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        activateDefaultMessage = false;
+        defaultMessage = "Merhaba, ben tafooAI";
+      });
+
+      // After a further 2 seconds, show the second message
+      Future.delayed(Duration(seconds: 2), () {
+        setState(() {
+          activateDefaultMessage2 = false;
+          defaultMessage2 =
+              "Dilediğin soruyu bana sorabilirsin, ben tafooAI, memnuniyetle sorularını bekliyorum ☺️";
+        });
+      });
+    });
   }
 
   @override
@@ -43,21 +77,46 @@ class WebChatPage extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              controller: _scrollController,
-              itemCount: chatProvider.messages.length,
-              itemBuilder: (context, index) {
-                final currentMessage = chatProvider.messages[index];
-                return KeyedSubtree(
-                  key: ValueKey(index),
-                  child: ChatBuble(
-                    isUserInput: currentMessage["isUser"],
-                    message: currentMessage["message"],
-                    isLoading: currentMessage["isLoading"] ?? false,
-                    isWeb: true,
-                  ),
-                );
-              },
-            ),
+                controller: _scrollController,
+                itemCount: chatProvider.messages.length +
+                    2,
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return ChatBuble(
+                      isUserInput: false,
+                      isLoading: activateDefaultMessage,
+                      isWeb: true,
+                      message: defaultMessage,
+                    );
+                  }
+                  else if (index == 1 && !activateDefaultMessage) {
+                    return ChatBuble(
+                      isUserInput: false,
+                      isLoading: activateDefaultMessage2,
+                      isWeb: true,
+                      message: defaultMessage2,
+                    );
+                  }
+                  else {
+                    final adjustedIndex = index - 2;
+                    if (adjustedIndex >= 0 &&
+                        adjustedIndex < chatProvider.messages.length) {
+                      final currentMessage =
+                          chatProvider.messages[adjustedIndex];
+                      return KeyedSubtree(
+                        key: ValueKey(index),
+                        child: ChatBuble(
+                          isUserInput: currentMessage["isUser"],
+                          message: currentMessage["message"],
+                          isLoading: currentMessage["isLoading"] ?? false,
+                          isWeb: true,
+                        ),
+                      );
+                    } else {
+                      return SizedBox();
+                    }
+                  }
+                }),
           ),
           ChatUserInputWidget(
             controller: _messageController,

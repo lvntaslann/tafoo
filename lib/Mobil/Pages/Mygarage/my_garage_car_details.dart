@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tafoo/Mobil/Pages/Mygarage/my_garage_car_damage_result.dart';
 import 'package:tafoo/Mobil/Pages/sharecar/shared_car_details.dart';
 import 'package:tafoo/Widgets/Mobil/button/back_button.dart';
 import 'package:tafoo/Widgets/car_image.dart';
@@ -21,15 +22,15 @@ class MyGarageCarDetails extends StatefulWidget {
 
 class _MyGarageCarDetailsState extends State<MyGarageCarDetails> {
   void goAiResult() async {
-    /*Navigator.push(
+    Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AutomobileCardamageResult(
-          url: widget.carData['svgFile']
+        builder: (context) => MyGarageCarDamageResult(
+          url: widget.carData['svgFile'],
+          image: widget.carData['imageFile'],
         ),
       ),
     );
-    */
   }
 
   @override
