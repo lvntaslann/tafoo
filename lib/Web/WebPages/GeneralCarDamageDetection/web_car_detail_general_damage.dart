@@ -30,8 +30,8 @@ class _WebCarDetailGeneralDamageState extends State<WebCarDetailGeneralDamage> {
             if (widget.imageBytes != null)
                Center(
             child: Container(
-              width: 450,
-              height: 450,
+              width: 800,
+              height: 800,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
@@ -48,7 +48,7 @@ class _WebCarDetailGeneralDamageState extends State<WebCarDetailGeneralDamage> {
                 child: Image.memory(
                   widget.imageBytes!,
                   fit: BoxFit.cover,
-                  width: 800,
+                  width: 500,
                   height: 350,
                 ),
               ),

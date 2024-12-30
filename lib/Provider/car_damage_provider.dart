@@ -14,7 +14,7 @@ class CarDamageProvider extends ChangeNotifier {
 
   // Upload image to Flask API for damage detection
   Future<void> uploadImageFromUrl(String imageUrl) async {
-    var url = Uri.parse('http://127.0.0.1:7000/detect_damage');
+    var url = Uri.parse('http://10.82.15.147:7000/detect_damage');
     var request = http.MultipartRequest('POST', url);
 
     try {
@@ -55,7 +55,7 @@ class CarDamageProvider extends ChangeNotifier {
 
   // Upload image directly from XFile
   Future<void> uploadImageFromFile(XFile imageFile) async {
-    var url = Uri.parse('http://127.0.0.1:7000/detect_damage');
+    var url = Uri.parse('http://10.82.15.147:7000/detect_damage');
     var request = http.MultipartRequest('POST', url);
 
     try {
@@ -88,7 +88,7 @@ class CarDamageProvider extends ChangeNotifier {
   }
 
   Future<void> uploadImageFromBytes(Uint8List fileBytes, String fileName) async {
-  var url = Uri.parse('http://127.0.0.1:7000/detect_damage');
+  var url = Uri.parse('http://10.82.15.147:7000/detect_damage');
   var request = http.MultipartRequest('POST', url);
 
   try {
