@@ -6,8 +6,8 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# API anahtarını ortam değişkenlerinden alın
-API_KEY = os.getenv("OPENROUTER_API_KEY", "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")
+
+API_KEY = os.getenv("OPENROUTER_API_KEY", "")
 
 @app.route('/adverts-instruct', methods=['POST'])
 def adverts_instruct():
