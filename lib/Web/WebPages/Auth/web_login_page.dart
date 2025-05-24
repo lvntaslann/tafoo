@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tafoo/Provider/auth_provider.dart';
+import 'package:tafoo/services/auth_provider.dart';
 import 'package:tafoo/Web/WebPages/Auth/web_signup_page.dart';
 import 'package:tafoo/Web/WebPages/web_home_page.dart';
 import 'package:tafoo/Widgets/Mobil/auth/login_with_google_widget.dart';

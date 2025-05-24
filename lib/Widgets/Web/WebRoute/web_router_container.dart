@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tafoo/Web/WebPages/ChatBot/web_chat_bot.dart';
-import 'package:tafoo/Web/WebPages/GeneralAdverts/web_general_adverts.dart';
-import 'package:tafoo/Web/WebPages/GeneralCarDamageDetection/web_add_image_general.dart';
-import 'package:tafoo/Web/WebPages/ShareCar/web_share_car_page.dart';
-import 'package:tafoo/Web/WebPages/MyGarage/web_my_garage.dart';
-import 'package:tafoo/Widgets/Web/WebRoute/my_web_default_container.dart';
+import 'package:tafoo/web/webpages/chatbot/web_chat_bot.dart';
+import 'package:tafoo/web/webpages/generaladverts/web_general_adverts.dart';
+import 'package:tafoo/web/webpages/generalcardamagedetection/web_add_image_general.dart';
+import 'package:tafoo/web/webpages/sharecar/web_share_car_page.dart';
+import 'package:tafoo/web/webpages/mygarage/web_my_garage.dart';
+import 'package:tafoo/widgets/web/webroute/my_web_default_container.dart';
 
 class RouterContainer extends StatefulWidget {
   const RouterContainer({

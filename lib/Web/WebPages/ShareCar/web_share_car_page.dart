@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:tafoo/Provider/share_car_provider.dart';
-import 'package:tafoo/Web/WebPages/ShareCar/web_add_image_page.dart';
-import 'package:tafoo/Widgets/Web/ShareCar/web_share_car_button.dart';
-import 'package:tafoo/Widgets/Web/ShareCar/web_share_car_text_widget.dart';
-import 'package:tafoo/Widgets/Web/ShareCar/web_share_car_title.dart';
-import 'package:tafoo/Widgets/Web/ShareCar/web_textfield.dart';
+import 'package:tafoo/services/share_car_provider.dart';
+import 'package:tafoo/web/webpages/sharecar/web_add_image_page.dart';
+import 'package:tafoo/widgets/web/sharecar/web_share_car_button.dart';
+import 'package:tafoo/widgets/web/sharecar/web_share_car_text_widget.dart';
+import 'package:tafoo/widgets/web/sharecar/web_share_car_title.dart';
+import 'package:tafoo/widgets/web/sharecar/web_textfield.dart';
 
 class WebShareCarPage extends StatefulWidget {
   const WebShareCarPage({Key? key}) : super(key: key);

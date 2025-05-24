@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tafoo/Provider/chat_services_provider.dart';
+import 'package:tafoo/services/chat_services_provider.dart';
 import 'package:tafoo/Widgets/ChatBot/chat_buble.dart';
 import 'package:tafoo/Widgets/ChatBot/chat_user_input_widget.dart';
 

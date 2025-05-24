@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tafoo/Provider/car_damage_provider.dart';
+import 'package:tafoo/services/car_damage_provider.dart';
 
-import 'package:tafoo/Provider/storage_provider_web.dart';
-import 'package:tafoo/Provider/share_car_provider.dart';
+import 'package:tafoo/services/storage_provider_web.dart';
+import 'package:tafoo/services/share_car_provider.dart';
 
 class web_add_image_container_widget extends StatefulWidget {
   const web_add_image_container_widget({

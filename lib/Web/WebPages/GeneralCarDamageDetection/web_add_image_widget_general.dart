@@ -2,7 +2,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:tafoo/Provider/car_damage_provider.dart';
+import 'package:tafoo/services/car_damage_provider.dart';
 
 
 class WebAddImageWidgetGeneral extends StatefulWidget {

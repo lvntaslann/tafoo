@@ -1,7 +1,7 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tafoo/Provider/share_car_provider.dart';
+import 'package:tafoo/services/share_car_provider.dart';
 import 'package:tafoo/Web/WebPages/MyGarage/web_my_garage_detail.dart';
 import 'package:tafoo/Widgets/Web/NavBatItem/web_navbar.dart';
 

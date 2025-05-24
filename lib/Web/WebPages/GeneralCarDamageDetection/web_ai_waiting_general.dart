@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_circular_progress_indicator/flutter_circular_progress_indicator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:tafoo/Provider/car_damage_provider.dart';
+import 'package:tafoo/services/car_damage_provider.dart';
 import 'package:tafoo/Web/WebPages/GeneralCarDamageDetection/web_car_detail_general_damage.dart';
 
 class WebAiWaitingGeneral extends StatelessWidget {

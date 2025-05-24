@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tafoo/Web/WebPages/GeneralAdverts/web_general_adverts.dart';
-import 'package:tafoo/Widgets/Web/Category/web_category_widget.dart';
-import 'package:tafoo/Widgets/Web/DownloadApp/web_download_app.dart';
-import 'package:tafoo/Widgets/Web/NavBatItem/nav_button.dart';
-import 'package:tafoo/Widgets/Web/NavBatItem/web_navbar.dart';
-import 'package:tafoo/Widgets/Web/WebRoute/web_router_container.dart';
-import 'package:tafoo/Widgets/Web/car_discover.dart';
-import 'package:tafoo/Widgets/Web/example_image.dart';
+import 'package:tafoo/web/webpages/generaladverts/web_general_adverts.dart';
+import 'package:tafoo/widgets/web/category/web_category_widget.dart';
+import 'package:tafoo/widgets/web/downloadapp/web_download_app.dart';
+import 'package:tafoo/widgets/web/navbatitem/nav_button.dart';
+import 'package:tafoo/widgets/web/navbatitem/web_navbar.dart';
+import 'package:tafoo/widgets/web/webroute/web_router_container.dart';
+import 'package:tafoo/widgets/web/car_discover.dart';
+import 'package:tafoo/widgets/web/example_image.dart';
 
 class WebHomePage extends StatefulWidget {
   const WebHomePage({Key? key}) : super(key: key);

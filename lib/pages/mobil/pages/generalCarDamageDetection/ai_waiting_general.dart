@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_circular_progress_indicator/flutter_circular_progress_indicator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:tafoo/pages/mobil/pages/generalCarDamageDetection/car_detail_general.dart';
 import 'package:tafoo/services/car_damage_provider.dart';
-import 'package:tafoo/services/share_car_provider.dart';
-import 'package:tafoo/Web/WebPages/ShareCar/web_car_share_detail.dart';
 
-class WebAiWaitingPage extends StatefulWidget {
-  const WebAiWaitingPage({ Key? key }) : super(key: key);
+
+class AiWaitingGeneral extends StatefulWidget {
+const AiWaitingGeneral({ Key? key }) : super(key: key);
 
   @override
-  _WebAiWaitingPageState createState() => _WebAiWaitingPageState();
+  State<AiWaitingGeneral> createState() => _AiWaitingGeneralState();
 }
 
-class _WebAiWaitingPageState extends State<WebAiWaitingPage> {
-   late final CarDamageProvider carDamageProvider;
+class _AiWaitingGeneralState extends State<AiWaitingGeneral> {
+  late final CarDamageProvider carDamageProvider;
 
   @override
   void initState() {
@@ -28,13 +28,11 @@ class _WebAiWaitingPageState extends State<WebAiWaitingPage> {
   void _onCarDamageProcessed() async {
     if (!mounted) return;
     await Future.delayed(Duration(seconds: 1)); // 1 saniyelik gecikme
-    if (carDamageProvider.processedImage != null && carDamageProvider.detections != null) {
-      Provider.of<CarShareProvider>(context,listen: false).resetSvgUploadStatus();
-      
+    if (carDamageProvider.processedImage != null && carDamageProvider.detections != null) {      
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => WebCarShareDetail(
+          builder: (context) => CarDetailGeneral(
             imageBytes: carDamageProvider.processedImage,
             detections: carDamageProvider.detections,
           ),
@@ -48,6 +46,7 @@ class _WebAiWaitingPageState extends State<WebAiWaitingPage> {
     carDamageProvider.removeListener(_onCarDamageProcessed);
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,29 +65,31 @@ class _WebAiWaitingPageState extends State<WebAiWaitingPage> {
           Padding(
             padding: const EdgeInsets.only(left: 50),
             child: CircularProgressInd().normalCircular(
-                height: 55,
-                width: 55,
-                isSpining: true,
-                secondaryColor: Colors.deepPurple[900],
-                secondaryWidth: 10,
-                backgroundColor: Colors.amber,
-                padding: EdgeInsets.all(10),
-                backgroundBorder:
-                    Border.all(color: Colors.deepPurple, width: 3),
-                valueWidth: 6),
+              height: 55,
+              width: 55,
+              isSpining: true,
+              secondaryColor: Colors.deepPurple[900],
+              secondaryWidth: 10,
+              backgroundColor: Colors.amber,
+              padding: EdgeInsets.all(10),
+              backgroundBorder: Border.all(color: Colors.deepPurple, width: 3),
+              valueWidth: 6,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 200, left: 50),
             child: Text(
               "Yapay zeka tarafından test ediliyor...",
               style: TextStyle(
-                  color: Color(0XFF898989),
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+                color: Color(0XFF898989),
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
   }
 }
+

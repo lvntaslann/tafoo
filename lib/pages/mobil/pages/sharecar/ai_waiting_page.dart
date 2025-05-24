@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_circular_progress_indicator/flutter_circular_progress_indicator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:tafoo/pages/mobil/pages/sharecar/shared_car_details.dart';
 import 'package:tafoo/services/car_damage_provider.dart';
 import 'package:tafoo/services/share_car_provider.dart';
-import 'package:tafoo/Web/WebPages/ShareCar/web_car_share_detail.dart';
 
-class WebAiWaitingPage extends StatefulWidget {
-  const WebAiWaitingPage({ Key? key }) : super(key: key);
+class AiWaitingPage extends StatefulWidget {
+  const AiWaitingPage({Key? key}) : super(key: key);
 
   @override
-  _WebAiWaitingPageState createState() => _WebAiWaitingPageState();
+  _AiWaitingPageState createState() => _AiWaitingPageState();
 }
 
-class _WebAiWaitingPageState extends State<WebAiWaitingPage> {
-   late final CarDamageProvider carDamageProvider;
+class _AiWaitingPageState extends State<AiWaitingPage> {
+
+  late final CarDamageProvider carDamageProvider;
 
   @override
   void initState() {
@@ -34,7 +35,7 @@ class _WebAiWaitingPageState extends State<WebAiWaitingPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => WebCarShareDetail(
+          builder: (context) => SharedCarDetails(
             imageBytes: carDamageProvider.processedImage,
             detections: carDamageProvider.detections,
           ),

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tafoo/Provider/auth_provider.dart';
+import 'package:tafoo/services/auth_provider.dart';
 import 'package:tafoo/Web/WebPages/Auth/web_login_page.dart';
 import 'package:tafoo/Widgets/Web/Auth/textfield_for_webauth.dart';
 import 'package:tafoo/Widgets/Web/Auth/web_auth_button.dart';
